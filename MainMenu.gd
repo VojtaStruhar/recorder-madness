@@ -2,7 +2,8 @@ extends Control
 
 onready var fletnicka = $MicrophoneInput
 
-func _process(delta):
+func _process(_delta: float):
 	print(fletnicka.current_note)
-	$VBoxContainer/NoteLabel.text = NoteFrequencies.names[round(fletnicka.current_note)]
-	$VBoxContainer/PercentageSign.text = str(round(fletnicka.current_note_relative * 100) / 100.0)
+	$"%NoteLabel".text = NoteFrequencies.names[round(fletnicka.current_note)]
+	$"%PercentageSign".text = str(round(fletnicka.current_note_relative * 100) / 100.0)
+	
