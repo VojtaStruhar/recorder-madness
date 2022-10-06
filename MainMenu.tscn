@@ -13,12 +13,21 @@ script = ExtResource( 1 )
 margin_right = 40.0
 margin_bottom = 40.0
 
-[node name="Label" type="Label" parent="VBoxContainer"]
+[node name="NoteLabel" type="Label" parent="VBoxContainer"]
 margin_right = 174.0
 margin_bottom = 14.0
-text = "Hi, mom!"
+text = "Note label"
+
+[node name="PercentageSign" type="Label" parent="VBoxContainer"]
+margin_top = 18.0
+margin_right = 174.0
+margin_bottom = 32.0
+text = "0%"
 
 [node name="DeviceSelection" parent="VBoxContainer" instance=ExtResource( 2 )]
+margin_top = 36.0
 margin_right = 174.0
+margin_bottom = 56.0
 
 [node name="MicrophoneInput" parent="." instance=ExtResource( 3 )]
+processing_mode = 0
