@@ -2,8 +2,7 @@
 
 [ext_resource path="res://MainMenu.gd" type="Script" id=1]
 [ext_resource path="res://UIElements/DeviceSelection.tscn" type="PackedScene" id=2]
-
-[sub_resource type="AudioStreamMicrophone" id=2]
+[ext_resource path="res://SoundMagic/MicrophoneInput.tscn" type="PackedScene" id=3]
 
 [node name="MainMenu" type="Control"]
 anchor_right = 1.0
@@ -15,14 +14,11 @@ margin_right = 40.0
 margin_bottom = 40.0
 
 [node name="Label" type="Label" parent="VBoxContainer"]
-margin_right = 60.0
+margin_right = 174.0
 margin_bottom = 14.0
 text = "Hi, mom!"
 
 [node name="DeviceSelection" parent="VBoxContainer" instance=ExtResource( 2 )]
-margin_right = 60.0
+margin_right = 174.0
 
-[node name="mic_input" type="AudioStreamPlayer" parent="."]
-stream = SubResource( 2 )
-autoplay = true
-bus = "Fletnicka"
+[node name="MicrophoneInput" parent="." instance=ExtResource( 3 )]
