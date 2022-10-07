@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Assets/spaceships_packed.png" type="Texture" id=1]
 [ext_resource path="res://SoundMagic/MicrophoneInput.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Minigames/Tyrian/TyrianSpaceship.gd" type="Script" id=3]
+[ext_resource path="res://Minigames/Tyrian/TyrianEnemy.tscn" type="PackedScene" id=4]
 
 [node name="TyrianLevel" type="Node2D"]
 
@@ -10,30 +11,39 @@
 position = Vector2( 512, 300 )
 
 [node name="UpperBound" type="Position2D" parent="."]
-position = Vector2( 60, 30 )
+position = Vector2( 80, 30 )
 
 [node name="LowerBound" type="Position2D" parent="."]
-position = Vector2( 60, 570 )
+position = Vector2( 80, 570 )
 
 [node name="MicrophoneInput" parent="." instance=ExtResource( 2 )]
 processing_mode = 0
 NOTES_BUFFER_SIZE = 3
 
 [node name="Player" type="Node2D" parent="."]
-position = Vector2( 60, 300 )
+position = Vector2( 80, 300 )
 script = ExtResource( 3 )
 
 [node name="Spaceship" type="Sprite" parent="Player"]
 rotation = 1.57079
+scale = Vector2( 2, 2 )
 texture = ExtResource( 1 )
 hframes = 4
 vframes = 6
 
 [node name="Label" type="Label" parent="Player"]
-margin_left = -51.0
-margin_top = -6.0
-margin_right = -14.0
-margin_bottom = 25.0
+margin_left = -59.0
+margin_top = -5.0
+margin_right = -22.0
+margin_bottom = 26.0
 text = "C# (5)
 "
 align = 2
+
+[node name="Timer" type="Timer" parent="Player"]
+autostart = true
+
+[node name="Enemy" parent="." instance=ExtResource( 4 )]
+position = Vector2( 530, 213 )
+
+[connection signal="timeout" from="Player/Timer" to="Player" method="_on_Timer_timeout"]
