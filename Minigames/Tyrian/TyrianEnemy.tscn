@@ -131,6 +131,15 @@ rotation = 1.5708
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite/Area2D"]
 shape = SubResource( 1 )
 
+[node name="Sprite2" type="Sprite" parent="Sprite"]
+modulate = Color( 0, 0, 0, 0.235294 )
+position = Vector2( -9.99996, -10 )
+z_index = -1
+texture = ExtResource( 2 )
+hframes = 4
+vframes = 6
+frame = 9
+
 [node name="Explosion" type="Sprite" parent="."]
 rotation = -1.5708
 texture = ExtResource( 3 )

@@ -46,6 +46,14 @@ texture = ExtResource( 1 )
 hframes = 4
 vframes = 6
 
+[node name="SpaceshipShadow" type="Sprite" parent="Player/Spaceship"]
+modulate = Color( 0, 0, 0, 0.235294 )
+position = Vector2( 10, 10 )
+z_index = -1
+texture = ExtResource( 1 )
+hframes = 4
+vframes = 6
+
 [node name="Label" type="Label" parent="Player"]
 margin_left = -59.0
 margin_top = -5.0
