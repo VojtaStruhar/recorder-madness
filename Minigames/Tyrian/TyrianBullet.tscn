@@ -5,7 +5,7 @@
 [sub_resource type="GDScript" id=1]
 script/source = "extends Node2D
 
-export var speed = 200
+export var speed = 300
 
 func _process(delta):
 	position.x += speed * delta

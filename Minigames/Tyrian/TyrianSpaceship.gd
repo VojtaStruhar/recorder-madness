@@ -4,6 +4,8 @@ onready var upperBound = $"../UpperBound"
 onready var lowerBound = $"../LowerBound"
 onready var fletnicka := $"../MicrophoneInput"
 onready var noteLabel := $Label
+onready var firePoint := $FirePoint
+
 onready var bulletTemplate = preload("res://Minigames/Tyrian/TyrianBullet.tscn")
 
 onready var extents: float = lowerBound.position.y - upperBound.position.y
@@ -17,11 +19,7 @@ func _process(delta):
 	
 	noteLabel.text = NoteFrequencies.names[round(fletnicka.current_note)]
 
-func _on_FireTimer_timeout():
-	print()
-
-
 func _on_Timer_timeout():
 	var bullet = bulletTemplate.instance()
 	get_parent().add_child(bullet)
-	bullet.position = position
+	bullet.global_position = firePoint.global_position
