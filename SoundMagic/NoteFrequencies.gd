@@ -7,7 +7,6 @@ var notes = []
 var names = []
 
 func _init():
-	print("Note Frequencies initialized!")
 	notes.append(130.812782650299317)
 	names.append("C (3)")
 	notes.append(138.591315488436048)
