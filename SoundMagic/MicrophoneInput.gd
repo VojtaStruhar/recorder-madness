@@ -5,15 +5,15 @@ enum NoteBufferProcessingMode {
 }
 export (NoteBufferProcessingMode) var processing_mode = NoteBufferProcessingMode.MEDIAN
 
-const HIGHEST_NOTE_INDEX = 45 # 45 is A2, it's the highest note I'm comfortable playing, really.
+const HIGHEST_NOTE_INDEX = 40 # 45 is A2, it's the highest note I'm comfortable playing, really.
 const LOWEST_NOTE_INDEX = 24 # 24 is the low C on my recorder
 
 # This is the main observed property to the outside world. Stores current note
 var current_note: float = LOWEST_NOTE_INDEX
 # Stores current note in the context of Recorder's range. From 0 to 1
-var current_note_relative: float = 0
+var current_note_normalized: float = 0
 
-const NOTES_BUFFER_SIZE = 7
+export var NOTES_BUFFER_SIZE = 7
 var notes_buffer = []
 
 var spectrum_analyzer: AudioEffectSpectrumAnalyzerInstance
@@ -56,7 +56,7 @@ func analyze_recorder_notes() -> void:
 	elif processing_mode == NoteBufferProcessingMode.MEDIAN:
 		current_note = array_median(notes_buffer)
 	
-	current_note_relative = clamp((current_note - LOWEST_NOTE_INDEX) / float(HIGHEST_NOTE_INDEX - LOWEST_NOTE_INDEX), 0, 1)
+	current_note_normalized = clamp((current_note - LOWEST_NOTE_INDEX) / float(HIGHEST_NOTE_INDEX - LOWEST_NOTE_INDEX), 0, 1)
 
 
 func array_average(arr: Array) -> float:
