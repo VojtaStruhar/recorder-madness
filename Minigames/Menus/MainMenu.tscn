@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=2]
 
-[ext_resource path="res://MainMenu.gd" type="Script" id=1]
+[ext_resource path="res://Minigames/Menus/MainMenu.gd" type="Script" id=1]
 [ext_resource path="res://UIElements/DeviceSelection.tscn" type="PackedScene" id=2]
 [ext_resource path="res://SoundMagic/MicrophoneInput.tscn" type="PackedScene" id=3]
 [ext_resource path="res://UIElements/app_theme.tres" type="Theme" id=4]

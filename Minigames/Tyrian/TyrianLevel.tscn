@@ -24,8 +24,16 @@ script/source = "extends Node2D
 # The right boundary is supposed to only catch bullets. The left boundary will 
 # collide with an enemy plane, if one manages to pass thru.
 
+var gameOverTemplate := preload(\"res://Minigames/Menus/ScoreScreen.tscn\")
+onready var enemySpawner := $\"../EnemySpawner\"
+
 func _on_LBoundary_area_entered(area):
 	print(\"GAME OVER\")
+	# Put game result into the singleton, the gameover screen will pull it itself
+	SceneManager.lastGame.score = enemySpawner.score
+	SceneManager.lastGame.minigame = SceneManager.Screen.TYRIAN
+	
+	SceneManager.change_scene(SceneManager.Screen.GAME_OVER)
 "
 
 [sub_resource type="RectangleShape2D" id=1]
