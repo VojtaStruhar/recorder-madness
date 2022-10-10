@@ -1,9 +1,10 @@
-[gd_resource type="Theme" load_steps=8 format=2]
+[gd_resource type="Theme" load_steps=9 format=2]
 
 [ext_resource path="res://UIElements/button_normal.tres" type="StyleBox" id=1]
 [ext_resource path="res://UIElements/button_pressed.tres" type="StyleBox" id=2]
 [ext_resource path="res://UIElements/button_disabled.tres" type="StyleBox" id=3]
 [ext_resource path="res://Assets/UI/Peach Days.ttf" type="DynamicFontData" id=4]
+[ext_resource path="res://Assets/UI/scrollVertical_25px.png" type="Texture" id=5]
 
 [sub_resource type="DynamicFont" id=1]
 size = 18
@@ -41,9 +42,11 @@ Button/styles/normal = ExtResource( 1 )
 Button/styles/pressed = ExtResource( 2 )
 HBoxContainer/constants/separation = 10
 Label/fonts/font = SubResource( 2 )
-MarginContainer/constants/margin_bottom = 10
-MarginContainer/constants/margin_left = 10
-MarginContainer/constants/margin_right = 10
-MarginContainer/constants/margin_top = 10
+MarginContainer/constants/margin_bottom = 20
+MarginContainer/constants/margin_left = 20
+MarginContainer/constants/margin_right = 20
+MarginContainer/constants/margin_top = 20
+OptionButton/constants/arrow_margin = 0
+OptionButton/icons/arrow = ExtResource( 5 )
 Panel/styles/panel = SubResource( 3 )
 VBoxContainer/constants/separation = 10

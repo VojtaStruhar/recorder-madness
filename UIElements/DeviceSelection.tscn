@@ -1,4 +1,6 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://UIElements/app_theme.tres" type="Theme" id=1]
 
 [sub_resource type="GDScript" id=1]
 script/source = "extends OptionButton
@@ -22,6 +24,8 @@ func _on_DeviceSelection_item_selected(index):
 margin_top = 18.0
 margin_right = 114.0
 margin_bottom = 38.0
+rect_min_size = Vector2( 250, 0 )
+theme = ExtResource( 1 )
 text = "Input Device Selection"
 script = SubResource( 1 )
 
