@@ -1,8 +1,31 @@
-[gd_resource type="Theme" load_steps=4 format=2]
+[gd_resource type="Theme" load_steps=8 format=2]
 
 [ext_resource path="res://UIElements/button_normal.tres" type="StyleBox" id=1]
 [ext_resource path="res://UIElements/button_pressed.tres" type="StyleBox" id=2]
 [ext_resource path="res://UIElements/button_disabled.tres" type="StyleBox" id=3]
+[ext_resource path="res://Assets/UI/Peach Days.ttf" type="DynamicFontData" id=4]
+
+[sub_resource type="DynamicFont" id=1]
+size = 18
+use_filter = true
+extra_spacing_char = 1
+font_data = ExtResource( 4 )
+
+[sub_resource type="DynamicFont" id=2]
+use_filter = true
+font_data = ExtResource( 4 )
+
+[sub_resource type="StyleBoxFlat" id=3]
+bg_color = Color( 0.6, 0.6, 0.6, 0.6 )
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_blend = true
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
 
 [resource]
 Button/colors/font_color = Color( 0.14902, 0.14902, 0.14902, 1 )
@@ -10,14 +33,17 @@ Button/colors/font_color_disabled = Color( 0.65098, 0.65098, 0.65098, 1 )
 Button/colors/font_color_focus = Color( 0.12549, 0.12549, 0.12549, 1 )
 Button/colors/font_color_hover = Color( 0.14902, 0.14902, 0.14902, 1 )
 Button/colors/font_color_pressed = Color( 0.0901961, 0.0901961, 0.0901961, 1 )
+Button/fonts/font = SubResource( 1 )
 Button/styles/disabled = ExtResource( 3 )
 Button/styles/focus = ExtResource( 1 )
 Button/styles/hover = ExtResource( 1 )
 Button/styles/normal = ExtResource( 1 )
 Button/styles/pressed = ExtResource( 2 )
 HBoxContainer/constants/separation = 10
+Label/fonts/font = SubResource( 2 )
 MarginContainer/constants/margin_bottom = 10
 MarginContainer/constants/margin_left = 10
 MarginContainer/constants/margin_right = 10
 MarginContainer/constants/margin_top = 10
+Panel/styles/panel = SubResource( 3 )
 VBoxContainer/constants/separation = 10

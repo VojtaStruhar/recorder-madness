@@ -13,6 +13,7 @@ func _on_ScreenTransitionButton_pressed():
 margin_top = 128.0
 margin_right = 1004.0
 margin_bottom = 158.0
+rect_min_size = Vector2( 150, 30 )
 text = "Screen Transition"
 script = SubResource( 1 )
 
