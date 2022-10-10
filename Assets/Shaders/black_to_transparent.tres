@@ -1,0 +1,10 @@
+[gd_resource type="Shader" format=2]
+
+[resource]
+code = "shader_type canvas_item;
+
+void fragment() {
+	COLOR = texture(TEXTURE, UV);
+	float distance_from_middle = distance(UV, vec2(0.5));
+	COLOR.a = max(0.5 - distance_from_middle, 0);
+}"

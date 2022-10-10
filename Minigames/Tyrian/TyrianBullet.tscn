@@ -10,22 +10,24 @@ export var speed = 300
 func _process(delta):
 	position.x += speed * delta
 
-func _on_Area2D_area_entered(area):
+func _on_Area2D_area_entered(_area):
 	queue_free()
 "
 
 [sub_resource type="CircleShape2D" id=2]
 
 [node name="Bullet" type="Node2D"]
+scale = Vector2( 1.5, 1.5 )
 script = SubResource( 1 )
 
-[node name="Sprite" type="Sprite" parent="."]
+[node name="BulletSprite" type="Sprite" parent="."]
 rotation = 1.5708
 texture = ExtResource( 1 )
 hframes = 12
 vframes = 10
 
 [node name="Area2D" type="Area2D" parent="."]
+visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource( 2 )
