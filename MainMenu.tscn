@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://MainMenu.gd" type="Script" id=1]
 [ext_resource path="res://UIElements/DeviceSelection.tscn" type="PackedScene" id=2]
 [ext_resource path="res://SoundMagic/MicrophoneInput.tscn" type="PackedScene" id=3]
 [ext_resource path="res://UIElements/app_theme.tres" type="Theme" id=4]
+[ext_resource path="res://UIElements/ScreenTransitionButton.tscn" type="PackedScene" id=5]
 
 [node name="MainMenu" type="Control"]
 anchor_right = 1.0
@@ -41,3 +42,9 @@ text = "0%"
 margin_top = 48.0
 margin_right = 1004.0
 margin_bottom = 78.0
+
+[node name="ScreenTransitionButton" parent="MarginContainer/VBoxContainer" instance=ExtResource( 5 )]
+margin_top = 88.0
+margin_bottom = 118.0
+text = "Tyrian"
+destination = 1

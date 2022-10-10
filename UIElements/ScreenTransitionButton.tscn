@@ -1,0 +1,19 @@
+[gd_scene load_steps=2 format=2]
+
+[sub_resource type="GDScript" id=1]
+script/source = "extends Button
+
+export(SceneManager.Screen) var destination
+
+func _on_ScreenTransitionButton_pressed():
+	SceneManager.change_scene(destination)
+"
+
+[node name="ScreenTransitionButton" type="Button"]
+margin_top = 128.0
+margin_right = 1004.0
+margin_bottom = 158.0
+text = "Screen Transition"
+script = SubResource( 1 )
+
+[connection signal="pressed" from="." to="." method="_on_ScreenTransitionButton_pressed"]
