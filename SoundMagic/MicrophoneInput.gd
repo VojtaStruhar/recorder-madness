@@ -27,14 +27,19 @@ func _ready() -> void:
 func _process(_delta: float) -> void:
 	analyze_recorder_notes()
 
+
 func analyze_recorder_notes() -> void:
 	var highest_magnitude: float = -1
 	var highest_magnitude_note_index: int = -1
 	
 	for i in range(1, len(NoteFrequencies.notes) - 1):
+		var target = NoteFrequencies.notes[i]
+		var lower = NoteFrequencies.notes[i - 1]
+		var higher = NoteFrequencies.notes[i + 1]
+		
 		var mag = spectrum_analyzer.get_magnitude_for_frequency_range(
-			NoteFrequencies.notes[i - 1],
-			NoteFrequencies.notes[i + 1],
+			target - (target - lower) / 2.0,
+			target + (higher - target) / 2.0,
 			AudioEffectSpectrumAnalyzerInstance.MAGNITUDE_AVERAGE
 		).length()
 		
