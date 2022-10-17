@@ -1,0 +1,84 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://UIElements/app_theme.tres" type="Theme" id=1]
+[ext_resource path="res://Assets/UI/Milky Coffee.ttf" type="DynamicFontData" id=2]
+[ext_resource path="res://Assets/UI/yellow_button_pressed.png" type="Texture" id=3]
+[ext_resource path="res://Assets/UI/yellow_button.png" type="Texture" id=4]
+
+[sub_resource type="StyleBoxTexture" id=4]
+texture = ExtResource( 4 )
+region_rect = Rect2( 0, 0, 190, 49 )
+margin_left = 8.0
+margin_right = 8.0
+margin_top = 8.0
+margin_bottom = 8.0
+
+[sub_resource type="StyleBoxTexture" id=5]
+texture = ExtResource( 3 )
+region_rect = Rect2( 0, 0, 190, 45 )
+margin_left = 8.0
+margin_right = 8.0
+margin_top = 8.0
+margin_bottom = 8.0
+
+[sub_resource type="GDScript" id=2]
+script/source = "extends Button
+
+var mic_input: MicrophoneInput
+var listening: bool = true
+
+export(NoteFrequencies.NotesEnum) var activation_note = 35
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	mic_input = get_tree().current_scene.find_node(\"MicrophoneInput\")
+	assert(mic_input != null)
+	$Label.text = NoteFrequencies.names[activation_note].split(\" \")[0]
+
+func _process(_delta):
+	if listening && mic_input.current_note == activation_note:
+		listening = false
+		$MuteTimer.start()
+		emit_signal(\"pressed\")
+		
+
+# Timer should stop the button from emiting the \"pressed\" signal like crazy. 
+# Let things happen. It's usually a screen transition
+func _on_MuteTimer_timeout():
+	listening = true
+"
+
+[sub_resource type="DynamicFont" id=1]
+size = 20
+outline_size = 2
+use_filter = true
+font_data = ExtResource( 2 )
+
+[node name="RecorderPressableButton" type="Button"]
+margin_right = 240.0
+margin_bottom = 39.0
+rect_min_size = Vector2( 100, 0 )
+theme = ExtResource( 1 )
+custom_styles/hover = SubResource( 4 )
+custom_styles/pressed = SubResource( 5 )
+custom_styles/focus = SubResource( 4 )
+custom_styles/normal = SubResource( 4 )
+text = "play to press"
+script = SubResource( 2 )
+
+[node name="Label" type="Label" parent="."]
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_left = -40.0
+margin_top = -11.5
+margin_bottom = 11.5
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_fonts/font = SubResource( 1 )
+text = "C#"
+
+[node name="MuteTimer" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="timeout" from="MuteTimer" to="." method="_on_MuteTimer_timeout"]

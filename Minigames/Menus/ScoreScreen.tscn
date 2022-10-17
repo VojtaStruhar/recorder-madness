@@ -1,19 +1,26 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Assets/UI/Milky Coffee.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://UIElements/app_theme.tres" type="Theme" id=2]
 [ext_resource path="res://Assets/UI/Font_Title.tres" type="DynamicFont" id=3]
-[ext_resource path="res://UIElements/ScreenTransitionButton.tscn" type="PackedScene" id=4]
+[ext_resource path="res://UIElements/RecorderPressableButton.tscn" type="PackedScene" id=5]
+[ext_resource path="res://SoundMagic/MicrophoneInput.tscn" type="PackedScene" id=6]
 
 [sub_resource type="GDScript" id=2]
 script/source = "extends Control
 
 onready var scoreLabel := $\"%ScoreLabel\"
-onready var playAgainButton := $\"%PlayAgainButton\"
 
 func _ready():
 	scoreLabel.text = \"Score: \" + str(SceneManager.lastGame.score)
-	playAgainButton.destination = SceneManager.lastGame.minigame
+
+
+func _on_PlayAgain_pressed():
+	SceneManager.change_scene(SceneManager.lastGame.minigame)
+
+
+func _on_MainMenu_pressed():
+	SceneManager.change_scene(SceneManager.Screen.MAIN_MENU)
 "
 
 [sub_resource type="DynamicFont" id=1]
@@ -28,6 +35,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 theme = ExtResource( 2 )
 script = SubResource( 2 )
+
+[node name="MicrophoneInput" parent="." instance=ExtResource( 6 )]
 
 [node name="ColorRect" type="ColorRect" parent="."]
 anchor_right = 1.0
@@ -64,15 +73,19 @@ custom_fonts/font = SubResource( 1 )
 text = "Score: 0"
 align = 1
 
-[node name="PlayAgainButton" parent="MainColumn" instance=ExtResource( 4 )]
-unique_name_in_owner = true
+[node name="PlayAgain" parent="MainColumn" instance=ExtResource( 5 )]
 margin_top = 166.0
 margin_right = 476.0
-margin_bottom = 196.0
+margin_bottom = 205.0
 text = "Play Again"
+activation_note = 33
 
-[node name="MainMenuButton" parent="MainColumn" instance=ExtResource( 4 )]
-margin_top = 206.0
+[node name="MainMenu" parent="MainColumn" instance=ExtResource( 5 )]
+margin_top = 215.0
 margin_right = 476.0
-margin_bottom = 236.0
-text = "Main Menu"
+margin_bottom = 254.0
+text = "Main menu"
+activation_note = 30
+
+[connection signal="pressed" from="MainColumn/PlayAgain" to="." method="_on_PlayAgain_pressed"]
+[connection signal="pressed" from="MainColumn/MainMenu" to="." method="_on_MainMenu_pressed"]

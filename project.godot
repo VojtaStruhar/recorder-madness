@@ -8,6 +8,16 @@
 
 config_version=4
 
+_global_script_classes=[ {
+"base": "Node",
+"class": "MicrophoneInput",
+"language": "GDScript",
+"path": "res://SoundMagic/MicrophoneInput.gd"
+} ]
+_global_script_class_icons={
+"MicrophoneInput": ""
+}
+
 [application]
 
 config/name="HCI_Lab_Music_Game"

@@ -1,5 +1,7 @@
 extends Node
 
+class_name MicrophoneInput
+
 enum NoteBufferProcessingMode {
 	AVERAGE, MEDIAN
 }
@@ -25,9 +27,9 @@ func _ready() -> void:
 
 	assert(HIGHEST_NOTE_INDEX >= LOWEST_NOTE_INDEX)
 
+
 func _process(_delta: float) -> void:
 	analyze_recorder_notes()
-	print(current_note)
 
 
 func analyze_recorder_notes() -> void:
