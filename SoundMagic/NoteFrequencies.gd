@@ -3,131 +3,190 @@ extends Node
 # Note frequencies taken from 
 # https://kassaflutes.com/articles/php-music-frequencies
 
-var notes = []
-var names = []
+enum NotesEnum {
+	C_3,
+	Cis_3,
+	D_3,
+	Dis_3,
+	E_3,
+	F_3,
+	Fis_3,
+	G_3,
+	Gis_3,
+	A_3,
+	B_3,
+	H_3,
+	C_4 # middle C,
+	Cis_4,
+	D_4,
+	Dis_4,
+	E_4,
+	F_4,
+	Fis_4,
+	G_4,
+	Gis_4,
+	A_4 # A 440,
+	B_4,
+	H_4,
+	C_5_Recorder_Low,
+	Cis_5,
+	D_5,
+	Dis_5,
+	E_5,
+	F_5,
+	Fis_5,
+	G_5,
+	Gis_5,
+	A_5,
+	B_5,
+	H_5,
+	C_6,
+	Cis_6,
+	D_6,
+	Dis_6,
+	E_6,
+	F_6,
+	Fis_6,
+	G_6,
+	Gis_6,
+	A_6_Recorder_Highest,
+	B_6,
+	H_6,
+	C_7,
+	Cis_7,
+	D_7,
+	Dis_7,
+	E_7,
+	F_7,
+	Fis_7,
+	G_7,
+	Gis_7,
+	A_7,
+	B_7,
+	H_7
+}
 
-func _init():
-	notes.append(130.812782650299317)
-	names.append("C (3)")
-	notes.append(138.591315488436048)
-	names.append("C# (3)")
-	notes.append(146.832383958703780)
-	names.append("D (3)")
-	notes.append(155.563491861040455)
-	names.append("D# (3)")
-	notes.append(164.813778456434964)
-	names.append("E (3)")
-	notes.append(174.614115716501942)
-	names.append("F (3)")
-	notes.append(184.997211355817199)
-	names.append("F# (3)")
-	notes.append(195.997717990874647)
-	names.append("G (3)")
-	notes.append(207.652348789972569)
-	names.append("G# (3)")
-	notes.append(220.000000000000000)
-	names.append("A (3)")
-	notes.append(233.081880759044958)
-	names.append("B (3)")
-	notes.append(246.941650628062055)
-	names.append("H (3)")
-	
-	notes.append(261.625565300598634)
-	names.append("C (4)") # middle C
-	notes.append(277.182630976872096)
-	names.append("C# (4)")
-	notes.append(293.664767917407560)
-	names.append("D (4)")
-	notes.append(311.126983722080910)
-	names.append("D# (4)")
-	notes.append(329.627556912869929)
-	names.append("E (4)")
-	notes.append(349.228231433003884)
-	names.append("F (4)")
-	notes.append(369.994422711634398)
-	names.append("F# (4)")
-	notes.append(391.995435981749294)
-	names.append("G (4)")
-	notes.append(415.304697579945138)
-	names.append("G# (4)")
-	notes.append(440.000000000000000)
-	names.append("A (4)") # A 440
-	notes.append(466.163761518089916)
-	names.append("B (4)")
-	notes.append(493.883301256124111)
-	names.append("H (4)")
-
-	notes.append(523.251130601197269)
-	names.append("C (5)")
-	notes.append(554.365261953744192)
-	names.append("C# (5)")
-	notes.append(587.329535834815120)
-	names.append("D (5)")
-	notes.append(622.253967444161821)
-	names.append("D# (5)")
-	notes.append(659.255113825739859)
-	names.append("E (5)")
-	notes.append(698.456462866007768)
-	names.append("F (5)")
-	notes.append(739.988845423268797)
-	names.append("F# (5)")
-	notes.append(783.990871963498588)
-	names.append("G (5)")
-	notes.append(830.609395159890277)
-	names.append("G# (5)")
-	notes.append(880.000000000000000)
-	names.append("A (5)")
-	notes.append(932.327523036179832)
-	names.append("B (5)")
-	notes.append(987.766602512248223)
-	names.append("H (5)")
-
-	notes.append(1046.502261202394538)
-	names.append("C (6)")
-	notes.append(1108.730523907488384)
-	names.append("C# (6)")
-	notes.append(1174.659071669630241)
-	names.append("D (6)")
-	notes.append(1244.507934888323642)
-	names.append("D# (6)")
-	notes.append(1318.510227651479718)
-	names.append("E (6)")
-	notes.append(1396.912925732015537)
-	names.append("F (6)")
-	notes.append(1479.977690846537595)
-	names.append("F# (6)")
-	notes.append(1567.981743926997176)
-	names.append("G (6)")
-	notes.append(1661.218790319780554)
-	names.append("G# (6)")
-	notes.append(1760.000000000000000)
-	names.append("A (6)")
-	notes.append(1864.655046072359665)
-	names.append("B (6)")
-	notes.append(1975.533205024496447)
-	names.append("H (6)")
-
-	notes.append(2093.004522404789077)
-	names.append("C (7)")
-	notes.append(2217.461047814976769)
-	names.append("C# (7)")
-	notes.append(2349.318143339260482)
-	names.append("D (7)")
-	notes.append(2489.015869776647285)
-	names.append("D# (7)")
-	notes.append(2637.020455302959437)
-	names.append("E (7)")
-	notes.append(2793.825851464031075)
-	names.append("F (7)")
-	notes.append(2959.955381693075191)
-	names.append("F# (7)")
-	notes.append(3135.963487853994352)
-	names.append("G (7)")
-	notes.append(3322.437580639561108)
-	names.append("G# (7)")
-	notes.append(3520.000000000000000)
-	names.append("A (7)")
-	notes.append(3729.310092144719331)
-	names.append("B (7)")
-	notes.append(3951.066410048992894)
-	names.append("H (7)")
+const notes = [
+	130.812782650299317,
+	138.591315488436048,
+	146.832383958703780,
+	155.563491861040455,
+	164.813778456434964,
+	174.614115716501942,
+	184.997211355817199,
+	195.997717990874647,
+	207.652348789972569,
+	220.000000000000000,
+	233.081880759044958,
+	246.941650628062055,
+	261.625565300598634,
+	277.182630976872096,
+	293.664767917407560,
+	311.126983722080910,
+	329.627556912869929,
+	349.228231433003884,
+	369.994422711634398,
+	391.995435981749294,
+	415.304697579945138,
+	440.000000000000000,
+	466.163761518089916,
+	493.883301256124111,
+	523.251130601197269,
+	554.365261953744192,
+	587.329535834815120,
+	622.253967444161821,
+	659.255113825739859,
+	698.456462866007768,
+	739.988845423268797,
+	783.990871963498588,
+	830.609395159890277,
+	880.000000000000000,
+	932.327523036179832,
+	987.766602512248223,
+	1046.502261202394538,
+	1108.730523907488384,
+	1174.659071669630241,
+	1244.507934888323642,
+	1318.510227651479718,
+	1396.912925732015537,
+	1479.977690846537595,
+	1567.981743926997176,
+	1661.218790319780554,
+	1760.000000000000000,
+	1864.655046072359665,
+	1975.533205024496447,
+	2093.004522404789077,
+	2217.461047814976769,
+	2349.318143339260482,
+	2489.015869776647285,
+	2637.020455302959437,
+	2793.825851464031075,
+	2959.955381693075191,
+	3135.963487853994352,
+	3322.437580639561108,
+	3520.000000000000000,
+	3729.310092144719331,
+	3951.066410048992894
+	]
+const names = [
+	"C (3)",
+	"C# (3)",
+	"D (3)",
+	"D# (3)",
+	"E (3)",
+	"F (3)",
+	"F# (3)",
+	"G (3)",
+	"G# (3)",
+	"A (3)",
+	"B (3)",
+	"H (3)",
+	"C (4)", # middle C
+	"C# (4)",
+	"D (4)",
+	"D# (4)",
+	"E (4)",
+	"F (4)",
+	"F# (4)",
+	"G (4)",
+	"G# (4)",
+	"A (4)", # A 440
+	"B (4)",
+	"H (4)",
+	"C (5)",
+	"C# (5)",
+	"D (5)",
+	"D# (5)",
+	"E (5)",
+	"F (5)",
+	"F# (5)",
+	"G (5)",
+	"G# (5)",
+	"A (5)",
+	"B (5)",
+	"H (5)",
+	"C (6)",
+	"C# (6)",
+	"D (6)",
+	"D# (6)",
+	"E (6)",
+	"F (6)",
+	"F# (6)",
+	"G (6)",
+	"G# (6)",
+	"A (6)",
+	"B (6)",
+	"H (6)",
+	"C (7)",
+	"C# (7)",
+	"D (7)",
+	"D# (7)",
+	"E (7)",
+	"F (7)",
+	"F# (7)",
+	"G (7)",
+	"G# (7)",
+	"A (7)",
+	"B (7)",
+	"H (7)"
+]

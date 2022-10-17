@@ -5,8 +5,8 @@ enum NoteBufferProcessingMode {
 }
 export (NoteBufferProcessingMode) var processing_mode = NoteBufferProcessingMode.MEDIAN
 
-const HIGHEST_NOTE_INDEX = 40 # 45 is A2, it's the highest note I'm comfortable playing, really.
-const LOWEST_NOTE_INDEX = 24 # 24 is the low C on my recorder
+export(NoteFrequencies.NotesEnum) var HIGHEST_NOTE_INDEX = 40 # 45 is A2, it's the highest note I'm comfortable playing, really.
+export(NoteFrequencies.NotesEnum) var LOWEST_NOTE_INDEX = 24 # 24 is the low C on my recorder
 
 # This is the main observed property to the outside world. Stores current note
 var current_note: float = LOWEST_NOTE_INDEX
@@ -23,9 +23,11 @@ func _ready() -> void:
 	# We get 0th effect, since it's the only one on the bus
 	spectrum_analyzer = AudioServer.get_bus_effect_instance(record_bus_index, 0)
 
+	assert(HIGHEST_NOTE_INDEX >= LOWEST_NOTE_INDEX)
 
 func _process(_delta: float) -> void:
 	analyze_recorder_notes()
+	print(current_note)
 
 
 func analyze_recorder_notes() -> void:
