@@ -1,12 +1,22 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://UIElements/app_theme.tres" type="Theme" id=1]
 [ext_resource path="res://Assets/UI/Font_Title.tres" type="DynamicFont" id=2]
+[ext_resource path="res://Minigames/SongLevel/RecordingStudio.gd" type="Script" id=3]
+[ext_resource path="res://SoundMagic/MicrophoneInput.tscn" type="PackedScene" id=4]
+[ext_resource path="res://UIElements/DeviceSelection.tscn" type="PackedScene" id=5]
+[ext_resource path="res://UIElements/TimedLabel.tscn" type="PackedScene" id=6]
 
 [node name="RecordingStudio" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 theme = ExtResource( 1 )
+script = ExtResource( 3 )
+
+[node name="MicrophoneInput" parent="." instance=ExtResource( 4 )]
+NOTES_BUFFER_SIZE = 5
+QUIET_TOLERANCE = 3
+THROW_AWAY_QUIET_NOTES = true
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 anchor_right = 1.0
@@ -26,10 +36,16 @@ custom_fonts/font = ExtResource( 2 )
 text = "Recording studio"
 align = 1
 
-[node name="Subtitle" type="Label" parent="MarginContainer/VBoxContainer"]
+[node name="CenterContainer" type="CenterContainer" parent="MarginContainer/VBoxContainer"]
 margin_top = 118.0
 margin_right = 984.0
 margin_bottom = 138.0
+
+[node name="Subtitle" type="Label" parent="MarginContainer/VBoxContainer/CenterContainer"]
+unique_name_in_owner = true
+margin_left = 225.0
+margin_right = 758.0
+margin_bottom = 20.0
 text = "Start playing, record the notes to an array and save it as a resource!"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
@@ -37,8 +53,9 @@ margin_top = 148.0
 margin_right = 984.0
 margin_bottom = 256.0
 
-[node name="Note" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer"]
-margin_right = 487.0
+[node name="NoteLabel" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+margin_right = 974.0
 margin_bottom = 108.0
 size_flags_horizontal = 3
 custom_colors/font_color = Color( 0, 0, 0, 1 )
@@ -46,12 +63,101 @@ custom_fonts/font = ExtResource( 2 )
 text = "D"
 align = 1
 
-[node name="Label3" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="TimeLeftLabel" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+margin_left = 984.0
+margin_top = 44.0
+margin_right = 984.0
+margin_bottom = 64.0
+
+[node name="TimedLabel" parent="MarginContainer/VBoxContainer" instance=ExtResource( 6 )]
+unique_name_in_owner = true
+margin_top = 266.0
+margin_right = 984.0
+margin_bottom = 286.0
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+margin_top = 296.0
+margin_right = 984.0
+margin_bottom = 320.0
+
+[node name="BPMLabel" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer3"]
+margin_top = 2.0
+margin_right = 138.0
+margin_bottom = 22.0
+text = "BPM for recording"
+
+[node name="BpmInput" type="SpinBox" parent="MarginContainer/VBoxContainer/HBoxContainer3"]
+unique_name_in_owner = true
+margin_left = 148.0
+margin_right = 222.0
+margin_bottom = 24.0
+min_value = 60.0
+max_value = 180.0
+value = 110.0
+
+[node name="HBoxContainer5" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+margin_top = 330.0
+margin_right = 984.0
+margin_bottom = 369.0
+
+[node name="StartRecording" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer5"]
+margin_right = 487.0
+margin_bottom = 39.0
+size_flags_horizontal = 3
+text = "Start recording (in 3 seconds)"
+
+[node name="StopRecording" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer5"]
 margin_left = 497.0
 margin_right = 984.0
-margin_bottom = 108.0
+margin_bottom = 39.0
 size_flags_horizontal = 3
-custom_colors/font_color = Color( 0, 0, 0, 1 )
-custom_fonts/font = ExtResource( 2 )
-text = "D"
-align = 1
+text = "Stop recording"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+margin_top = 379.0
+margin_right = 984.0
+margin_bottom = 403.0
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer2"]
+margin_top = 2.0
+margin_right = 203.0
+margin_bottom = 22.0
+text = "Name of the recorded song:"
+
+[node name="SongNameInput" type="LineEdit" parent="MarginContainer/VBoxContainer/HBoxContainer2"]
+unique_name_in_owner = true
+margin_left = 213.0
+margin_right = 984.0
+margin_bottom = 24.0
+size_flags_horizontal = 3
+
+[node name="HBoxContainer4" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+margin_top = 413.0
+margin_right = 984.0
+margin_bottom = 454.0
+
+[node name="SaveSong" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer4"]
+margin_right = 105.0
+margin_bottom = 41.0
+text = "Save song"
+
+[node name="DeviceSelection" parent="MarginContainer/VBoxContainer/HBoxContainer4" instance=ExtResource( 5 )]
+margin_left = 115.0
+margin_top = 0.0
+margin_right = 365.0
+margin_bottom = 41.0
+
+[node name="NoteTimer" type="Timer" parent="."]
+unique_name_in_owner = true
+
+[node name="StartTimer" type="Timer" parent="."]
+unique_name_in_owner = true
+wait_time = 3.0
+one_shot = true
+
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer5/StartRecording" to="." method="_on_StartRecording_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer5/StopRecording" to="." method="_on_StopRecording_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer4/SaveSong" to="." method="_on_SaveSong_pressed"]
+[connection signal="timeout" from="NoteTimer" to="." method="_on_NoteTimer_timeout"]
+[connection signal="timeout" from="StartTimer" to="." method="_on_StartTimer_timeout"]

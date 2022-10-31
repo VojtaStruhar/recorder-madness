@@ -13,9 +13,15 @@ _global_script_classes=[ {
 "class": "MicrophoneInput",
 "language": "GDScript",
 "path": "res://SoundMagic/MicrophoneInput.gd"
+}, {
+"base": "Resource",
+"class": "SongResource",
+"language": "GDScript",
+"path": "res://Assets/Songs/SongResource.gd"
 } ]
 _global_script_class_icons={
-"MicrophoneInput": ""
+"MicrophoneInput": "",
+"SongResource": ""
 }
 
 [application]

@@ -17,8 +17,9 @@ var current_note_normalized: float = 0
 # If the scanned magnitude is very low, we mark the state as quiet
 var is_quiet: bool = false
 
-export var NOTES_BUFFER_SIZE = 7
-export var QUIET_TOLERANCE = 7 # How many frames can we be quiet until it gets "announced"
+export(int) var NOTES_BUFFER_SIZE = 7
+export(int) var QUIET_TOLERANCE = 7 # How many frames can we be quiet until it gets "announced"
+export(bool) var THROW_AWAY_QUIET_NOTES = false
 var _quiet_score = 0 # How many frames are we currently quiet
 
 var notes_buffer = []
@@ -68,6 +69,9 @@ func analyze_recorder_notes() -> void:
 	else: _quiet_score = 0
 	
 	is_quiet = _quiet_score > QUIET_TOLERANCE
+	
+	if THROW_AWAY_QUIET_NOTES and is_quiet:
+		return
 	
 	# include only notes that aren't too low or too high 
 	# - usually surrounding noise or silence
