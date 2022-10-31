@@ -1,10 +1,11 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Assets/spaceships_packed.png" type="Texture" id=1]
 [ext_resource path="res://SoundMagic/MicrophoneInput.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Minigames/Tyrian/TyrianSpaceship.gd" type="Script" id=3]
 [ext_resource path="res://Assets/islands.png" type="Texture" id=4]
 [ext_resource path="res://Minigames/Tyrian/TyrianEnemySpawner.gd" type="Script" id=5]
+[ext_resource path="res://UIElements/app_theme.tres" type="Theme" id=6]
 
 [sub_resource type="GDScript" id=3]
 script/source = "extends Sprite
@@ -66,7 +67,7 @@ processing_mode = 0
 NOTES_BUFFER_SIZE = 3
 
 [node name="Player" type="Node2D" parent="."]
-position = Vector2( 80, 300 )
+position = Vector2( 93, 302 )
 script = ExtResource( 3 )
 
 [node name="FirePoint" type="Position2D" parent="Player"]
@@ -88,10 +89,11 @@ hframes = 4
 vframes = 6
 
 [node name="Label" type="Label" parent="Player"]
-margin_left = -59.0
-margin_top = -5.0
-margin_right = -22.0
-margin_bottom = 26.0
+margin_left = -76.0
+margin_top = -9.0
+margin_right = -25.0
+margin_bottom = 34.0
+theme = ExtResource( 6 )
 text = "C# (5)
 "
 align = 2
@@ -121,6 +123,7 @@ script = ExtResource( 5 )
 
 [node name="Timer" type="Timer" parent="EnemySpawner"]
 wait_time = 2.3
+one_shot = true
 autostart = true
 
 [connection signal="timeout" from="Player/Timer" to="Player" method="_on_Timer_timeout"]
