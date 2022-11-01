@@ -1,8 +1,8 @@
 extends Node2D
 
-onready var leftBound = $"../LeftBound"
-onready var rightBound = $"../RightBound"
-onready var fletnicka = $"../MicrophoneInput"
+onready var leftBound = $"%LeftBound"
+onready var rightBound = $"%RightBound"
+onready var fletnicka = $"%MicrophoneInput"
 
 export var MOVEMENT_SPEED = 100
 

@@ -17,6 +17,7 @@ func _ready() -> void:
 			select(i)
 	
 	PersistentData.microphone_choice = devices[selected]
+	AudioServer.capture_set_device(devices[selected])
 
 func _on_DeviceSelection_item_selected(index):
 	AudioServer.capture_set_device(devices[index])

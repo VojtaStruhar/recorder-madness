@@ -33,3 +33,6 @@ func change_scene(screen_index: int):
 		var path_segments = _scene_paths[screen_index].split("/")
 		printerr("Failed to change scene to " + path_segments[path_segments.size() - 1])
 		printerr(error)
+
+func _enter_tree():
+	randomize()

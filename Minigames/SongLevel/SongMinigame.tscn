@@ -5,7 +5,7 @@
 [ext_resource path="res://SoundMagic/MicrophoneInput.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Minigames/SongLevel/SongMinigame.gd" type="Script" id=4]
 [ext_resource path="res://Minigames/SongLevel/SheepPlayer.gd" type="Script" id=5]
-[ext_resource path="res://UIElements/DeviceSelection.tscn" type="PackedScene" id=6]
+[ext_resource path="res://UIElements/app_theme.tres" type="Theme" id=6]
 
 [sub_resource type="GDScript" id=8]
 script/source = "extends Sprite
@@ -61,16 +61,17 @@ radius = 17.0294
 [sub_resource type="GDScript" id=11]
 script/source = "extends Node2D
 
-onready var minigame = $\"..\"
-onready var fletnicka = $\"../MicrophoneInput\"
-onready var leftBound = $\"../LeftBound\"
-onready var rightBound = $\"../RightBound\"
+onready var minigame = $\"../..\"
+onready var fletnicka = $\"%MicrophoneInput\"
+onready var leftBound = $\"%LeftBound\"
+onready var rightBound = $\"%RightBound\"
 onready var extents = rightBound.position.x - leftBound.position.x
 
 var progress = 0
 
 const moneyBag = preload(\"res://Minigames/SongLevel/MoneyBag.tscn\")
 const treeBarrier = preload(\"res://Minigames/SongLevel/TreeBarrier.tscn\")
+const treeObstacle = preload(\"res://Minigames/SongLevel/TreeObstacle.tscn\")
 
 var last_note = -1
 var note_streak = 0
@@ -82,80 +83,66 @@ func _on_BpmTimer_timeout():
 		return
 	
 	var note = minigame.song_resource.notes[progress]
-
+	
+	if note == last_note:
+		note_streak += 1
+	else:
+		note_streak = 1
+	
 	# This should be judged from the songs LOW and HIGH, not the current mic input's
 	var note_relative = (note - fletnicka.LOWEST_NOTE_INDEX) / float(fletnicka.HIGHEST_NOTE_INDEX - fletnicka.LOWEST_NOTE_INDEX)
-	var money_x = extents * note_relative + leftBound.position.x
+	var reward_gx = extents * note_relative + leftBound.position.x
 	
-	var bag = moneyBag.instance()
-	add_child(bag)
-	bag.position.y = 0
-	bag.global_position.x = money_x
 	
-	bag.speed = minigame.song_resource.bpm * 1.5
+	if note_streak >= 4 and note != last_note: 
+		place_object(treeBarrier, reward_gx)
+	else: 
+		place_object(moneyBag, reward_gx)
+		# Sometimes, place a tree
+		if note_streak != 1 and randf() < 0.6:
+			var offset = randf() / 3 + 0.15
+			if note_relative > 0.5: offset = -offset
+			place_object(treeObstacle, extents * (note_relative + offset) + leftBound.position.x)
 	
+	last_note = note
 	progress += 1
 	
+func place_object(template, gx_coord):
+	var obstacle = template.instance()
+	
+	get_parent().add_child(obstacle)
+	obstacle.position.y = 0
+	obstacle.global_position.x = gx_coord
+	
+	obstacle.speed = minigame.song_resource.bpm * 1.5
 "
 
 [node name="SongMinigame" type="Node2D"]
 script = ExtResource( 4 )
 
 [node name="MicrophoneInput" parent="." instance=ExtResource( 3 )]
+unique_name_in_owner = true
 NOTES_BUFFER_SIZE = 5
 QUIET_TOLERANCE = 3
 THROW_AWAY_QUIET_NOTES = true
 
 [node name="Grass" type="Sprite" parent="."]
 position = Vector2( 513, 298 )
+z_index = -1
 texture = ExtResource( 2 )
 region_enabled = true
 region_rect = Rect2( 0, 0, 1200, 800 )
 script = SubResource( 8 )
 
-[node name="SheepPlayer" type="Node2D" parent="."]
-position = Vector2( 523, 548 )
-script = ExtResource( 5 )
-
-[node name="Sheep" type="AnimatedSprite" parent="SheepPlayer"]
-scale = Vector2( 1.1, 1.1 )
-frames = SubResource( 7 )
-speed_scale = 2.0
-
-[node name="MoneyScanner" type="Area2D" parent="SheepPlayer"]
-collision_layer = 0
-collision_mask = 8
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="SheepPlayer/MoneyScanner"]
-shape = SubResource( 10 )
-
-[node name="EnemyScanner" type="Area2D" parent="SheepPlayer"]
-collision_layer = 0
-collision_mask = 4
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="SheepPlayer/EnemyScanner"]
-shape = SubResource( 10 )
-
-[node name="PlayerCollider" type="Area2D" parent="SheepPlayer"]
-collision_layer = 3
-collision_mask = 0
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="SheepPlayer/PlayerCollider"]
-shape = SubResource( 10 )
-
 [node name="LeftBound" type="Position2D" parent="."]
+unique_name_in_owner = true
 visible = false
 position = Vector2( 36, 561 )
 
 [node name="RightBound" type="Position2D" parent="."]
+unique_name_in_owner = true
 visible = false
 position = Vector2( 985, 564 )
-
-[node name="ObstacleSpawner" type="Node2D" parent="."]
-position = Vector2( 531, -157 )
-script = SubResource( 11 )
-
-[node name="BpmTimer" type="Timer" parent="ObstacleSpawner"]
 
 [node name="StartGameTimer" type="Timer" parent="."]
 wait_time = 3.0
@@ -167,13 +154,64 @@ one_shot = true
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="DeviceSelection" parent="CanvasLayer" instance=ExtResource( 6 )]
-margin_left = 32.0
-margin_top = 37.0
-margin_right = 282.0
-margin_bottom = 78.0
+[node name="Panel" type="Panel" parent="CanvasLayer"]
+margin_left = 25.0
+margin_top = 24.0
+margin_right = 65.0
+margin_bottom = 64.0
+rect_min_size = Vector2( 150, 0 )
+theme = ExtResource( 6 )
 
-[connection signal="area_entered" from="SheepPlayer/MoneyScanner" to="." method="_on_MoneyScanner_area_entered"]
-[connection signal="timeout" from="ObstacleSpawner/BpmTimer" to="ObstacleSpawner" method="_on_BpmTimer_timeout"]
+[node name="ScoreLabel" type="Label" parent="CanvasLayer/Panel"]
+unique_name_in_owner = true
+anchor_top = 0.5
+anchor_bottom = 0.5
+margin_left = 12.0
+margin_top = -10.0
+margin_right = 262.0
+margin_bottom = 10.0
+text = "Score: 0"
+
+[node name="YSort" type="YSort" parent="."]
+
+[node name="SheepPlayer" type="Node2D" parent="YSort"]
+position = Vector2( 523, 548 )
+script = ExtResource( 5 )
+
+[node name="Sheep" type="AnimatedSprite" parent="YSort/SheepPlayer"]
+scale = Vector2( 1.1, 1.1 )
+frames = SubResource( 7 )
+speed_scale = 2.0
+
+[node name="MoneyScanner" type="Area2D" parent="YSort/SheepPlayer"]
+collision_layer = 0
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="YSort/SheepPlayer/MoneyScanner"]
+shape = SubResource( 10 )
+
+[node name="ObstacleScanner" type="Area2D" parent="YSort/SheepPlayer"]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="YSort/SheepPlayer/ObstacleScanner"]
+shape = SubResource( 10 )
+
+[node name="PlayerCollider" type="Area2D" parent="YSort/SheepPlayer"]
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="YSort/SheepPlayer/PlayerCollider"]
+shape = SubResource( 10 )
+
+[node name="ObstacleSpawner" type="Node2D" parent="YSort"]
+position = Vector2( 531, -157 )
+script = SubResource( 11 )
+
+[node name="BpmTimer" type="Timer" parent="YSort/ObstacleSpawner"]
+unique_name_in_owner = true
+
 [connection signal="timeout" from="StartGameTimer" to="." method="_on_StartGameTimer_timeout"]
 [connection signal="timeout" from="FinishGameTimer" to="." method="_on_FinishGameTimer_timeout"]
+[connection signal="area_entered" from="YSort/SheepPlayer/MoneyScanner" to="." method="_on_MoneyScanner_area_entered"]
+[connection signal="area_entered" from="YSort/SheepPlayer/ObstacleScanner" to="." method="_on_ObstacleScanner_area_entered"]
+[connection signal="timeout" from="YSort/ObstacleSpawner/BpmTimer" to="YSort/ObstacleSpawner" method="_on_BpmTimer_timeout"]

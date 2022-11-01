@@ -1,7 +1,11 @@
 extends Control
 
-
+func play_song(path: String): 
+	SceneManager.songResource = load(path)
+	SceneManager.change_scene(SceneManager.Screen.SONG)
 
 func _on_HappyBday_pressed():
-	SceneManager.songResource = load("res://Assets/Songs/Happy_bday.tres")
-	SceneManager.change_scene(SceneManager.Screen.SONG)
+	play_song("res://Assets/Songs/Happy_bday.tres")
+
+func _on_SuperTrooper_pressed():
+	play_song("res://Assets/Songs/Abba_-_Super_Trooper.tres")

@@ -56,7 +56,7 @@ margin_bottom = 256.0
 
 [node name="NoteLabel" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
-margin_right = 974.0
+margin_right = 823.0
 margin_bottom = 108.0
 size_flags_horizontal = 3
 custom_colors/font_color = Color( 0, 0, 0, 1 )
@@ -64,12 +64,21 @@ custom_fonts/font = ExtResource( 2 )
 text = "D"
 align = 1
 
+[node name="NoteIndexLabel" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+margin_left = 833.0
+margin_top = 44.0
+margin_right = 909.0
+margin_bottom = 64.0
+text = "Note index"
+
 [node name="TimeLeftLabel" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
-margin_left = 984.0
+margin_left = 919.0
 margin_top = 44.0
 margin_right = 984.0
 margin_bottom = 64.0
+text = "Time Left"
 
 [node name="TimedLabel" parent="MarginContainer/VBoxContainer" instance=ExtResource( 6 )]
 unique_name_in_owner = true

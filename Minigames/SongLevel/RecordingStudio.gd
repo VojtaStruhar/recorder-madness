@@ -6,6 +6,7 @@ onready var start_timer = $"%StartTimer"
 onready var note_timer = $"%NoteTimer"
 onready var fletnicka = $MicrophoneInput
 onready var note_label = $"%NoteLabel"
+onready var note_index_label = $"%NoteIndexLabel"
 onready var subtitle = $"%Subtitle"
 onready var timedLabel := $"%TimedLabel"
 onready var timeLeftLabel := $"%TimeLeftLabel"
@@ -19,6 +20,7 @@ var song_resource = null
 
 func _process(_delta):
 	note_label.text = NoteFrequencies.names[fletnicka.current_note]
+	note_index_label.text = str(fletnicka.current_note)
 	if fletnicka.error_message != "":
 		subtitle.text = fletnicka.error_message
 	else:
