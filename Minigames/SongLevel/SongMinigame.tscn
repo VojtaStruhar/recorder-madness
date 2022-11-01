@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://Assets/TinySwordsPack/HappySheep_Bouncing.png" type="Texture" id=1]
 [ext_resource path="res://Assets/TinySwordsPack/grass.png" type="Texture" id=2]
@@ -6,16 +6,20 @@
 [ext_resource path="res://Minigames/SongLevel/SongMinigame.gd" type="Script" id=4]
 [ext_resource path="res://Minigames/SongLevel/SheepPlayer.gd" type="Script" id=5]
 [ext_resource path="res://UIElements/DeviceSelection.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Minigames/SongLevel/AnimatedTree.tscn" type="PackedScene" id=7]
 
 [sub_resource type="GDScript" id=8]
 script/source = "extends Sprite
 
 var speed = 160
+var is_running = false
 
 func _process(delta):
+	if !is_running: return
+	
 	var rect = self.region_rect
 	self.region_rect = Rect2(rect.position.x, 
-							rect.position.y - delta * speed * 1.4 , 
+							rect.position.y - delta * speed * 1.7 , 
 							rect.size.x, 
 							rect.size.y)
 "
@@ -52,21 +56,32 @@ animations = [ {
 "speed": 5.0
 } ]
 
-[sub_resource type="GDScript" id=9]
-script/source = "extends AnimatedSprite
-
-func _ready():
-	self.playing = true
-"
-
 [sub_resource type="CircleShape2D" id=10]
 radius = 17.0294
+
+[sub_resource type="GDScript" id=11]
+script/source = "extends Node2D
+
+onready var minigame = $\"..\"
+var progress = 0
+
+
+
+func _on_BpmTimer_timeout():
+	if minigame.song_resource.notes.size() == progress:
+		print(\"The game is finished!\")
+		return
+	
+	
+	
+	progress += 1
+	
+"
 
 [node name="SongMinigame" type="Node2D"]
 script = ExtResource( 4 )
 
 [node name="MicrophoneInput" parent="." instance=ExtResource( 3 )]
-processing_mode = 0
 QUIET_TOLERANCE = 3
 THROW_AWAY_QUIET_NOTES = true
 
@@ -82,23 +97,75 @@ position = Vector2( 523, 548 )
 script = ExtResource( 5 )
 
 [node name="Sheep" type="AnimatedSprite" parent="SheepPlayer"]
+scale = Vector2( 1.1, 1.1 )
 frames = SubResource( 7 )
 speed_scale = 2.0
-script = SubResource( 9 )
 
-[node name="RigidBody2D" type="RigidBody2D" parent="SheepPlayer"]
+[node name="MoneyScanner" type="Area2D" parent="SheepPlayer"]
+collision_layer = 0
+collision_mask = 8
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="SheepPlayer/RigidBody2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SheepPlayer/MoneyScanner"]
+shape = SubResource( 10 )
+
+[node name="EnemyScanner" type="Area2D" parent="SheepPlayer"]
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SheepPlayer/EnemyScanner"]
+shape = SubResource( 10 )
+
+[node name="PlayerCollider" type="Area2D" parent="SheepPlayer"]
+collision_layer = 3
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SheepPlayer/PlayerCollider"]
 shape = SubResource( 10 )
 
 [node name="LeftBound" type="Position2D" parent="."]
+visible = false
 position = Vector2( 36, 561 )
 
 [node name="RightBound" type="Position2D" parent="."]
+visible = false
 position = Vector2( 985, 564 )
 
-[node name="DeviceSelection" parent="." instance=ExtResource( 6 )]
+[node name="ObstacleSpawner" type="Node2D" parent="."]
+script = SubResource( 11 )
+
+[node name="BpmTimer" type="Timer" parent="ObstacleSpawner"]
+
+[node name="StartGameTimer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
+[node name="TreeBarrier" type="Node2D" parent="."]
+
+[node name="Tree" parent="TreeBarrier" instance=ExtResource( 7 )]
+
+[node name="Tree2" parent="TreeBarrier" instance=ExtResource( 7 )]
+position = Vector2( 281, 83 )
+
+[node name="Tree3" parent="TreeBarrier" instance=ExtResource( 7 )]
+position = Vector2( 414, 85 )
+
+[node name="Tree4" parent="TreeBarrier" instance=ExtResource( 7 )]
+position = Vector2( 521, 88 )
+
+[node name="Tree5" parent="TreeBarrier" instance=ExtResource( 7 )]
+position = Vector2( 621, 93 )
+
+[node name="Tree6" parent="TreeBarrier" instance=ExtResource( 7 )]
+position = Vector2( 737, 92 )
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="DeviceSelection" parent="CanvasLayer" instance=ExtResource( 6 )]
 margin_left = 32.0
 margin_top = 37.0
 margin_right = 282.0
 margin_bottom = 78.0
+
+[connection signal="area_entered" from="SheepPlayer/MoneyScanner" to="." method="_on_MoneyScanner_area_entered"]
+[connection signal="timeout" from="ObstacleSpawner/BpmTimer" to="ObstacleSpawner" method="_on_BpmTimer_timeout"]
+[connection signal="timeout" from="StartGameTimer" to="." method="_on_StartGameTimer_timeout"]

@@ -1,0 +1,40 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://Assets/TinySwordsPack/Tree.png" type="Texture" id=1]
+
+[sub_resource type="AtlasTexture" id=12]
+atlas = ExtResource( 1 )
+region = Rect2( 0, 0, 192, 192 )
+
+[sub_resource type="AtlasTexture" id=13]
+atlas = ExtResource( 1 )
+region = Rect2( 192, 0, 192, 192 )
+
+[sub_resource type="AtlasTexture" id=14]
+atlas = ExtResource( 1 )
+region = Rect2( 384, 0, 192, 192 )
+
+[sub_resource type="AtlasTexture" id=15]
+atlas = ExtResource( 1 )
+region = Rect2( 576, 0, 192, 192 )
+
+[sub_resource type="SpriteFrames" id=18]
+animations = [ {
+"frames": [ SubResource( 12 ), SubResource( 13 ), SubResource( 14 ), SubResource( 15 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
+
+[sub_resource type="GDScript" id=19]
+script/source = "extends AnimatedSprite
+
+func _ready():
+	var play_speed = randf() + 0.5
+	speed_scale = play_speed
+	playing = true
+"
+
+[node name="Tree" type="AnimatedSprite"]
+frames = SubResource( 18 )
+script = SubResource( 19 )
