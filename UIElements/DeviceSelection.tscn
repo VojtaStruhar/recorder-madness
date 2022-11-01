@@ -13,11 +13,14 @@ func _ready() -> void:
 	for i in range(devices.size()):
 		var device = devices[i]
 		add_item(device)
-		if device == AudioServer.capture_get_device():
+		if device == AudioServer.capture_get_device() || device == PersistentData.microphone_choice:
 			select(i)
+	
+	PersistentData.microphone_choice = devices[selected]
 
 func _on_DeviceSelection_item_selected(index):
 	AudioServer.capture_set_device(devices[index])
+	PersistentData.microphone_choice = devices[index]
 "
 
 [node name="DeviceSelection" type="OptionButton"]

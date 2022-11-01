@@ -1,14 +1,18 @@
 extends Node2D
 
-var song_resource: SongResource = preload("res://Assets/Songs/bday_100bpm.tres")
+var song_resource: SongResource = null
 
 var player_score = 0
 
 func _ready():
+	song_resource = SceneManager.songResource
 	$StartGameTimer.start()
 
 func start_game():
-	if song_resource == null: return
+	if song_resource == null: 
+		printerr("No song assigned for minigame")
+		SceneManager.change_scene(SceneManager.Screen.MAIN_MENU)
+		return
 	
 	print("GAME STARTED, bpm: ", song_resource.bpm)
 	$ObstacleSpawner/BpmTimer.wait_time = 60.0 / song_resource.bpm

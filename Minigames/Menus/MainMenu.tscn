@@ -74,7 +74,7 @@ text = "Tyrian"
 icon = ExtResource( 6 )
 destination = 1
 
-[node name="TyrianButton2" parent="MarginContainer/VBoxContainer/CenterContainer/Minigames" instance=ExtResource( 5 )]
+[node name="SongButton" parent="MarginContainer/VBoxContainer/CenterContainer/Minigames" instance=ExtResource( 5 )]
 margin_top = 58.0
 margin_right = 350.0
 margin_bottom = 106.0

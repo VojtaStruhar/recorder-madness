@@ -15,12 +15,18 @@ _global_script_classes=[ {
 "path": "res://SoundMagic/MicrophoneInput.gd"
 }, {
 "base": "Resource",
+"class": "SaveData",
+"language": "GDScript",
+"path": "res://Persistence/SaveData.gd"
+}, {
+"base": "Resource",
 "class": "SongResource",
 "language": "GDScript",
 "path": "res://Assets/Songs/SongResource.gd"
 } ]
 _global_script_class_icons={
 "MicrophoneInput": "",
+"SaveData": "",
 "SongResource": ""
 }
 
@@ -38,6 +44,7 @@ enable_audio_input=true
 
 SceneManager="*res://SceneManager.gd"
 NoteFrequencies="*res://SoundMagic/NoteFrequencies.gd"
+PersistentData="*res://Persistence/PersistentData.gd"
 
 [display]
 

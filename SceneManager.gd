@@ -14,14 +14,15 @@ const _scene_paths = [
 	"res://Minigames/SongLevel/SongMinigame.tscn"
 ]
 
+# For game over screen (and the "play again" option)
 var lastGame = { "score": 0, "minigame": Screen.MAIN_MENU }
-
+# For launching the "play certain song" minigame
+var songResource: SongResource = null
 
 func game_over(score: int, minigame: int):
 	lastGame.score = score
 	lastGame.minigame = minigame
 	change_scene(Screen.GAME_OVER)
-
 
 func change_scene(screen_index: int):
 	var error = get_tree().change_scene(_scene_paths[screen_index])

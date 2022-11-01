@@ -30,11 +30,7 @@ onready var enemySpawner := $\"../EnemySpawner\"
 
 func _on_LBoundary_area_entered(area):
 	print(\"GAME OVER\")
-	# Put game result into the singleton, the gameover screen will pull it itself
-	SceneManager.lastGame.score = enemySpawner.score
-	SceneManager.lastGame.minigame = SceneManager.Screen.TYRIAN
-	
-	SceneManager.change_scene(SceneManager.Screen.GAME_OVER)
+	SceneManager.game_over(enemySpawner.score, SceneManager.Screen.TYRIAN)
 "
 
 [sub_resource type="RectangleShape2D" id=1]
