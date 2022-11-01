@@ -4,14 +4,16 @@ enum Screen {
 	MAIN_MENU,
 	TYRIAN,
 	GAME_OVER,
-	SONG
+	SONG,
+	SONG_SELECTION
 }
 # These have to be in the same order as their enum counterparts
 const _scene_paths = [
 	"res://Minigames/Menus/MainMenu.tscn",
 	"res://Minigames/Tyrian/TyrianLevel.tscn",
 	"res://Minigames/Menus/ScoreScreen.tscn",
-	"res://Minigames/SongLevel/SongMinigame.tscn"
+	"res://Minigames/SongLevel/SongMinigame.tscn",
+	"res://Minigames/Menus/SongSelectionMenu.tscn"
 ]
 
 # For game over screen (and the "play again" option)

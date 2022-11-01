@@ -80,7 +80,7 @@ margin_right = 350.0
 margin_bottom = 106.0
 text = "Play a song"
 icon = ExtResource( 9 )
-destination = 3
+destination = 4
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
 margin_top = 360.0
