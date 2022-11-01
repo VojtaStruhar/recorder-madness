@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://Assets/TinySwordsPack/HappySheep_Bouncing.png" type="Texture" id=1]
 [ext_resource path="res://Assets/TinySwordsPack/grass.png" type="Texture" id=2]
@@ -6,7 +6,6 @@
 [ext_resource path="res://Minigames/SongLevel/SongMinigame.gd" type="Script" id=4]
 [ext_resource path="res://Minigames/SongLevel/SheepPlayer.gd" type="Script" id=5]
 [ext_resource path="res://UIElements/DeviceSelection.tscn" type="PackedScene" id=6]
-[ext_resource path="res://Minigames/SongLevel/AnimatedTree.tscn" type="PackedScene" id=7]
 
 [sub_resource type="GDScript" id=8]
 script/source = "extends Sprite
@@ -19,7 +18,7 @@ func _process(delta):
 	
 	var rect = self.region_rect
 	self.region_rect = Rect2(rect.position.x, 
-							rect.position.y - delta * speed * 1.7 , 
+							rect.position.y - delta * speed , 
 							rect.size.x, 
 							rect.size.y)
 "
@@ -63,16 +62,35 @@ radius = 17.0294
 script/source = "extends Node2D
 
 onready var minigame = $\"..\"
+onready var fletnicka = $\"../MicrophoneInput\"
+onready var leftBound = $\"../LeftBound\"
+onready var rightBound = $\"../RightBound\"
+onready var extents = rightBound.position.x - leftBound.position.x
+
 var progress = 0
 
+const moneyBag = preload(\"res://Minigames/SongLevel/MoneyBag.tscn\")
+const treeBarrier = preload(\"res://Minigames/SongLevel/TreeBarrier.tscn\")
 
 
 func _on_BpmTimer_timeout():
 	if minigame.song_resource.notes.size() == progress:
-		print(\"The game is finished!\")
+		minigame.finish_game()
+		$BpmTimer.stop()
 		return
 	
+	var note = minigame.song_resource.notes[progress]
+
+	# This should be judged from the songs LOW and HIGH, not the current mic input's
+	var note_relative = (note - fletnicka.LOWEST_NOTE_INDEX) / float(fletnicka.HIGHEST_NOTE_INDEX - fletnicka.LOWEST_NOTE_INDEX)
+	var money_x = extents * note_relative + leftBound.position.x
 	
+	var bag = moneyBag.instance()
+	add_child(bag)
+	bag.position.y = 0
+	bag.global_position.x = money_x
+	
+	bag.speed = minigame.song_resource.bpm
 	
 	progress += 1
 	
@@ -131,32 +149,14 @@ visible = false
 position = Vector2( 985, 564 )
 
 [node name="ObstacleSpawner" type="Node2D" parent="."]
+position = Vector2( 531, -157 )
 script = SubResource( 11 )
 
 [node name="BpmTimer" type="Timer" parent="ObstacleSpawner"]
 
 [node name="StartGameTimer" type="Timer" parent="."]
-wait_time = 2.0
+wait_time = 3.0
 one_shot = true
-
-[node name="TreeBarrier" type="Node2D" parent="."]
-
-[node name="Tree" parent="TreeBarrier" instance=ExtResource( 7 )]
-
-[node name="Tree2" parent="TreeBarrier" instance=ExtResource( 7 )]
-position = Vector2( 281, 83 )
-
-[node name="Tree3" parent="TreeBarrier" instance=ExtResource( 7 )]
-position = Vector2( 414, 85 )
-
-[node name="Tree4" parent="TreeBarrier" instance=ExtResource( 7 )]
-position = Vector2( 521, 88 )
-
-[node name="Tree5" parent="TreeBarrier" instance=ExtResource( 7 )]
-position = Vector2( 621, 93 )
-
-[node name="Tree6" parent="TreeBarrier" instance=ExtResource( 7 )]
-position = Vector2( 737, 92 )
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 

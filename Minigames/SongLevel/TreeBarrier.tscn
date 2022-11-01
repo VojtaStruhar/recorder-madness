@@ -1,0 +1,190 @@
+[gd_scene load_steps=12 format=2]
+
+[ext_resource path="res://Minigames/SongLevel/MoneyBag.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Minigames/SongLevel/AnimatedTree.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Assets/TinySwordsPack/Tree.png" type="Texture" id=3]
+
+[sub_resource type="GDScript" id=21]
+script/source = "extends Node2D
+
+var speed = 0
+
+func _process(delta):
+	position.y += speed * delta
+	
+	if global_position.y > 1000:
+		queue_free()
+"
+
+[sub_resource type="AtlasTexture" id=12]
+atlas = ExtResource( 3 )
+region = Rect2( 0, 0, 192, 192 )
+
+[sub_resource type="AtlasTexture" id=13]
+atlas = ExtResource( 3 )
+region = Rect2( 192, 0, 192, 192 )
+
+[sub_resource type="AtlasTexture" id=14]
+atlas = ExtResource( 3 )
+region = Rect2( 384, 0, 192, 192 )
+
+[sub_resource type="AtlasTexture" id=15]
+atlas = ExtResource( 3 )
+region = Rect2( 576, 0, 192, 192 )
+
+[sub_resource type="SpriteFrames" id=18]
+animations = [ {
+"frames": [ SubResource( 12 ), SubResource( 13 ), SubResource( 14 ), SubResource( 15 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
+
+[sub_resource type="GDScript" id=19]
+script/source = "extends AnimatedSprite
+
+func _ready():
+	var play_speed = randf() + 0.5
+	speed_scale = play_speed
+	playing = true
+"
+
+[sub_resource type="RectangleShape2D" id=20]
+extents = Vector2( 501.75, 14 )
+
+[node name="TreeBarrier" type="Node2D"]
+script = SubResource( 21 )
+
+[node name="Tree" parent="." instance=ExtResource( 2 )]
+position = Vector2( 99, -57 )
+frames = SubResource( 18 )
+script = SubResource( 19 )
+
+[node name="Tree11" parent="." instance=ExtResource( 2 )]
+position = Vector2( 904, -56 )
+frames = SubResource( 18 )
+script = SubResource( 19 )
+
+[node name="Tree3" parent="." instance=ExtResource( 2 )]
+position = Vector2( 260, -55 )
+frames = SubResource( 18 )
+script = SubResource( 19 )
+
+[node name="Tree4" parent="." instance=ExtResource( 2 )]
+position = Vector2( 341, -59 )
+frames = SubResource( 18 )
+script = SubResource( 19 )
+
+[node name="Tree8" parent="." instance=ExtResource( 2 )]
+position = Vector2( 664, -54 )
+frames = SubResource( 18 )
+script = SubResource( 19 )
+
+[node name="Tree5" parent="." instance=ExtResource( 2 )]
+position = Vector2( 421, -59 )
+frames = SubResource( 18 )
+script = SubResource( 19 )
+
+[node name="Tree7" parent="." instance=ExtResource( 2 )]
+position = Vector2( 583, -57 )
+frames = SubResource( 18 )
+script = SubResource( 19 )
+
+[node name="Tree9" parent="." instance=ExtResource( 2 )]
+position = Vector2( 742, -62 )
+frames = SubResource( 18 )
+script = SubResource( 19 )
+
+[node name="Tree2" parent="." instance=ExtResource( 2 )]
+position = Vector2( 180, -59 )
+frames = SubResource( 18 )
+script = SubResource( 19 )
+
+[node name="Tree10" parent="." instance=ExtResource( 2 )]
+position = Vector2( 824, -56 )
+frames = SubResource( 18 )
+script = SubResource( 19 )
+
+[node name="Tree6" parent="." instance=ExtResource( 2 )]
+position = Vector2( 500, -56 )
+frames = SubResource( 18 )
+script = SubResource( 19 )
+
+[node name="Tree12" parent="." instance=ExtResource( 2 )]
+position = Vector2( 984, -48 )
+frames = SubResource( 18 )
+script = SubResource( 19 )
+
+[node name="Tree13" parent="." instance=ExtResource( 2 )]
+position = Vector2( -992, -59 )
+frames = SubResource( 18 )
+script = SubResource( 19 )
+
+[node name="Tree14" parent="." instance=ExtResource( 2 )]
+position = Vector2( -187, -58 )
+frames = SubResource( 18 )
+script = SubResource( 19 )
+
+[node name="Tree15" parent="." instance=ExtResource( 2 )]
+position = Vector2( -831, -57 )
+frames = SubResource( 18 )
+script = SubResource( 19 )
+
+[node name="Tree16" parent="." instance=ExtResource( 2 )]
+position = Vector2( -750, -61 )
+frames = SubResource( 18 )
+script = SubResource( 19 )
+
+[node name="Tree17" parent="." instance=ExtResource( 2 )]
+position = Vector2( -427, -56 )
+frames = SubResource( 18 )
+script = SubResource( 19 )
+
+[node name="Tree18" parent="." instance=ExtResource( 2 )]
+position = Vector2( -670, -61 )
+frames = SubResource( 18 )
+script = SubResource( 19 )
+
+[node name="Tree19" parent="." instance=ExtResource( 2 )]
+position = Vector2( -508, -59 )
+frames = SubResource( 18 )
+script = SubResource( 19 )
+
+[node name="Tree20" parent="." instance=ExtResource( 2 )]
+position = Vector2( -349, -64 )
+frames = SubResource( 18 )
+script = SubResource( 19 )
+
+[node name="Tree21" parent="." instance=ExtResource( 2 )]
+position = Vector2( -911, -61 )
+frames = SubResource( 18 )
+script = SubResource( 19 )
+
+[node name="Tree22" parent="." instance=ExtResource( 2 )]
+position = Vector2( -268, -54 )
+frames = SubResource( 18 )
+script = SubResource( 19 )
+
+[node name="Tree23" parent="." instance=ExtResource( 2 )]
+position = Vector2( -589, -60 )
+frames = SubResource( 18 )
+script = SubResource( 19 )
+
+[node name="Tree24" parent="." instance=ExtResource( 2 )]
+position = Vector2( -109, -52 )
+frames = SubResource( 18 )
+script = SubResource( 19 )
+
+[node name="MoneyBag" parent="." instance=ExtResource( 1 )]
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2( 579.25, 3 )
+shape = SubResource( 20 )
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Area2D"]
+position = Vector2( -594, 1 )
+shape = SubResource( 20 )

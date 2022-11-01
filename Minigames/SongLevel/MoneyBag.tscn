@@ -1,6 +1,24 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Assets/TinySwordsPack/G_Idle.png" type="Texture" id=1]
+
+[sub_resource type="GDScript" id=13]
+script/source = "extends Area2D
+
+var speed = 0
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta):
+	position.y += speed * delta
+	
+	if position.y > 1000:
+		queue_free()
+"
 
 [sub_resource type="CircleShape2D" id=12]
 radius = 27.0
@@ -8,6 +26,7 @@ radius = 27.0
 [node name="MoneyBag" type="Area2D"]
 collision_layer = 8
 collision_mask = 0
+script = SubResource( 13 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 12 )
