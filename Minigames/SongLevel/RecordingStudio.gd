@@ -40,10 +40,18 @@ func _on_StopRecording_pressed():
 	is_recording = false
 	note_timer.stop()
 	
+	var low = 100
+	var high = 0
+	for note in played_notes:
+		low = min(low, note)
+		high = max(high, note)
+	
 	song_resource = SongResource.new()
 	song_resource.name = "Recorded " + str(len(played_notes))
 	song_resource.bpm = bpm_input.value
 	song_resource.notes = played_notes
+	song_resource.low = max(low - 2, NoteFrequencies.NotesEnum.C_5_Recorder_Low)
+	song_resource.high = min(high + 2, NoteFrequencies.NotesEnum.A_6_Recorder_Highest)
 
 func _on_SaveSong_pressed():
 	if song_name_input.text != "":

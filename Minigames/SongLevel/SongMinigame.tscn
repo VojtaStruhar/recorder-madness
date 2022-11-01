@@ -94,15 +94,14 @@ func _on_BpmTimer_timeout():
 	var reward_gx = extents * note_relative + leftBound.position.x
 	
 	
-	if note_streak >= 4 and note != last_note: 
+	if note_streak % 4 == 0: 
 		place_object(treeBarrier, reward_gx)
 	else: 
 		place_object(moneyBag, reward_gx)
 		# Sometimes, place a tree
-		if note_streak != 1 and randf() < 0.6:
-			var offset = randf() / 3 + 0.15
-			if note_relative > 0.5: offset = -offset
-			place_object(treeObstacle, extents * (note_relative + offset) + leftBound.position.x)
+		if randf() < 0.8:
+			var coeff = -0.05 if randi() % 2 == 0 else 1.05
+			place_object(treeObstacle, extents * (coeff) + leftBound.position.x)
 	
 	last_note = note
 	progress += 1
@@ -136,13 +135,11 @@ script = SubResource( 8 )
 
 [node name="LeftBound" type="Position2D" parent="."]
 unique_name_in_owner = true
-visible = false
-position = Vector2( 36, 561 )
+position = Vector2( 50, 562 )
 
 [node name="RightBound" type="Position2D" parent="."]
 unique_name_in_owner = true
-visible = false
-position = Vector2( 985, 564 )
+position = Vector2( 974, 563 )
 
 [node name="StartGameTimer" type="Timer" parent="."]
 wait_time = 3.0

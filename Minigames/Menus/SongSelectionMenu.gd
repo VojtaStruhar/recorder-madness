@@ -9,3 +9,8 @@ func _on_HappyBday_pressed():
 
 func _on_SuperTrooper_pressed():
 	play_song("res://Assets/Songs/Abba_-_Super_Trooper.tres")
+
+func _on_JohnCena_pressed():
+	play_song("res://Assets/Songs/John_Cena_2.tres")
+
+
