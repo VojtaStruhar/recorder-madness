@@ -72,6 +72,8 @@ var progress = 0
 const moneyBag = preload(\"res://Minigames/SongLevel/MoneyBag.tscn\")
 const treeBarrier = preload(\"res://Minigames/SongLevel/TreeBarrier.tscn\")
 
+var last_note = -1
+var note_streak = 0
 
 func _on_BpmTimer_timeout():
 	if minigame.song_resource.notes.size() == progress:
@@ -90,7 +92,7 @@ func _on_BpmTimer_timeout():
 	bag.position.y = 0
 	bag.global_position.x = money_x
 	
-	bag.speed = minigame.song_resource.bpm
+	bag.speed = minigame.song_resource.bpm * 1.5
 	
 	progress += 1
 	
@@ -100,6 +102,7 @@ func _on_BpmTimer_timeout():
 script = ExtResource( 4 )
 
 [node name="MicrophoneInput" parent="." instance=ExtResource( 3 )]
+NOTES_BUFFER_SIZE = 5
 QUIET_TOLERANCE = 3
 THROW_AWAY_QUIET_NOTES = true
 
@@ -158,6 +161,10 @@ script = SubResource( 11 )
 wait_time = 3.0
 one_shot = true
 
+[node name="FinishGameTimer" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
+
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="DeviceSelection" parent="CanvasLayer" instance=ExtResource( 6 )]
@@ -169,3 +176,4 @@ margin_bottom = 78.0
 [connection signal="area_entered" from="SheepPlayer/MoneyScanner" to="." method="_on_MoneyScanner_area_entered"]
 [connection signal="timeout" from="ObstacleSpawner/BpmTimer" to="ObstacleSpawner" method="_on_BpmTimer_timeout"]
 [connection signal="timeout" from="StartGameTimer" to="." method="_on_StartGameTimer_timeout"]
+[connection signal="timeout" from="FinishGameTimer" to="." method="_on_FinishGameTimer_timeout"]

@@ -3,16 +3,25 @@ extends Node
 enum Screen {
 	MAIN_MENU,
 	TYRIAN,
-	GAME_OVER
+	GAME_OVER,
+	SONG
 }
 # These have to be in the same order as their enum counterparts
 const _scene_paths = [
 	"res://Minigames/Menus/MainMenu.tscn",
 	"res://Minigames/Tyrian/TyrianLevel.tscn",
-	"res://Minigames/Menus/ScoreScreen.tscn"
+	"res://Minigames/Menus/ScoreScreen.tscn",
+	"res://Minigames/SongLevel/SongMinigame.tscn"
 ]
 
 var lastGame = { "score": 0, "minigame": Screen.MAIN_MENU }
+
+
+func game_over(score: int, minigame: int):
+	lastGame.score = score
+	lastGame.minigame = minigame
+	change_scene(Screen.GAME_OVER)
+
 
 func change_scene(screen_index: int):
 	var error = get_tree().change_scene(_scene_paths[screen_index])
