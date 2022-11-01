@@ -44,7 +44,7 @@ func analyze_recorder_notes() -> void:
 	var highest_magnitude: float = -1
 	var highest_magnitude_note_index: int = -1
 	
-	for i in range(1, len(NoteFrequencies.notes) - 1):
+	for i in range(max(LOWEST_NOTE_INDEX - 1, 1), min(HIGHEST_NOTE_INDEX + 1, len(NoteFrequencies.notes) - 1)):
 		var target = NoteFrequencies.notes[i]
 		var lower = NoteFrequencies.notes[i - 1]
 		var higher = NoteFrequencies.notes[i + 1]

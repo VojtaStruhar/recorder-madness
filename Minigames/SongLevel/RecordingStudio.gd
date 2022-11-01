@@ -60,7 +60,6 @@ func _on_NoteTimer_timeout():
 
 
 func _on_StartTimer_timeout():
-	print("STARTING RECORDING")
 	is_recording = true
 	note_timer.wait_time = 60 / bpm_input.value
 	note_timer.start()

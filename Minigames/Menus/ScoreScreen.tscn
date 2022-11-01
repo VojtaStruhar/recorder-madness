@@ -3,7 +3,7 @@
 [ext_resource path="res://Assets/UI/Milky Coffee.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://UIElements/app_theme.tres" type="Theme" id=2]
 [ext_resource path="res://Assets/UI/Font_Title.tres" type="DynamicFont" id=3]
-[ext_resource path="res://UIElements/RecorderPressableButton.tscn" type="PackedScene" id=5]
+[ext_resource path="res://UIElements/ScreenTransitionButton.tscn" type="PackedScene" id=4]
 [ext_resource path="res://SoundMagic/MicrophoneInput.tscn" type="PackedScene" id=6]
 
 [sub_resource type="GDScript" id=2]
@@ -15,12 +15,12 @@ func _ready():
 	scoreLabel.text = \"Score: \" + str(SceneManager.lastGame.score)
 
 
-func _on_PlayAgain_pressed():
-	SceneManager.change_scene(SceneManager.lastGame.minigame)
-
-
-func _on_MainMenu_pressed():
+func _on_MainMenuButton_pressed():
 	SceneManager.change_scene(SceneManager.Screen.MAIN_MENU)
+
+
+func _on_PlayAgainButton_pressed():
+	SceneManager.change_scene(SceneManager.lastGame.minigame)
 "
 
 [sub_resource type="DynamicFont" id=1]
@@ -73,19 +73,17 @@ custom_fonts/font = SubResource( 1 )
 text = "Score: 0"
 align = 1
 
-[node name="PlayAgain" parent="MainColumn" instance=ExtResource( 5 )]
+[node name="PlayAgainButton" type="Button" parent="MainColumn"]
 margin_top = 166.0
 margin_right = 476.0
 margin_bottom = 205.0
 text = "Play Again"
-activation_note = 33
 
-[node name="MainMenu" parent="MainColumn" instance=ExtResource( 5 )]
+[node name="MainMenuButton" parent="MainColumn" instance=ExtResource( 4 )]
 margin_top = 215.0
 margin_right = 476.0
 margin_bottom = 254.0
 text = "Main menu"
-activation_note = 30
 
-[connection signal="pressed" from="MainColumn/PlayAgain" to="." method="_on_PlayAgain_pressed"]
-[connection signal="pressed" from="MainColumn/MainMenu" to="." method="_on_MainMenu_pressed"]
+[connection signal="pressed" from="MainColumn/PlayAgainButton" to="." method="_on_PlayAgainButton_pressed"]
+[connection signal="pressed" from="MainColumn/MainMenuButton" to="." method="_on_MainMenuButton_pressed"]

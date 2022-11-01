@@ -2,7 +2,7 @@
 
 [ext_resource path="res://Assets/spaceships_packed.png" type="Texture" id=1]
 [ext_resource path="res://SoundMagic/MicrophoneInput.tscn" type="PackedScene" id=2]
-[ext_resource path="res://Minigames/Tyrian/TyrianSpaceship.gd" type="Script" id=3]
+[ext_resource path="res://Minigames/Tyrian/TyrianPlayer.gd" type="Script" id=3]
 [ext_resource path="res://Assets/islands.png" type="Texture" id=4]
 [ext_resource path="res://Minigames/Tyrian/TyrianEnemySpawner.gd" type="Script" id=5]
 [ext_resource path="res://UIElements/app_theme.tres" type="Theme" id=6]
@@ -42,6 +42,12 @@ extents = Vector2( 10, 318.5 )
 
 [node name="TyrianLevel" type="Node2D"]
 
+[node name="MicrophoneInput" parent="." instance=ExtResource( 2 )]
+processing_mode = 0
+NOTES_BUFFER_SIZE = 3
+QUIET_TOLERANCE = 5
+THROW_AWAY_QUIET_NOTES = true
+
 [node name="InslandsBackground" type="Sprite" parent="."]
 modulate = Color( 0.666667, 0.666667, 0.666667, 1 )
 position = Vector2( 508, 298 )
@@ -61,10 +67,6 @@ position = Vector2( 80, 30 )
 
 [node name="LowerBound" type="Position2D" parent="."]
 position = Vector2( 80, 570 )
-
-[node name="MicrophoneInput" parent="." instance=ExtResource( 2 )]
-processing_mode = 0
-NOTES_BUFFER_SIZE = 3
 
 [node name="Player" type="Node2D" parent="."]
 position = Vector2( 93, 302 )
