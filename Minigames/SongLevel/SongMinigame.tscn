@@ -97,7 +97,8 @@ func _on_BpmTimer_timeout():
 	if note_streak % 4 == 0: 
 		place_object(treeBarrier, reward_gx)
 	else: 
-		place_object(moneyBag, reward_gx)
+		if note > 0: # The note isn't quiet
+			place_object(moneyBag, reward_gx)
 		# Sometimes, place a tree
 		if randf() < 0.8:
 			var coeff = -0.05 if randi() % 2 == 0 else 1.05

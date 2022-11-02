@@ -43,7 +43,7 @@ align = 1
 [node name="GridContainer" type="GridContainer" parent="MarginContainer/VBoxContainer"]
 margin_top = 85.0
 margin_right = 984.0
-margin_bottom = 175.0
+margin_bottom = 226.0
 columns = 2
 
 [node name="HappyBday" type="Button" parent="MarginContainer/VBoxContainer/GridContainer"]
@@ -74,6 +74,13 @@ margin_bottom = 90.0
 size_flags_horizontal = 3
 text = "HC KOMETA BRNO"
 
+[node name="CrazyFrog" type="Button" parent="MarginContainer/VBoxContainer/GridContainer"]
+margin_top = 102.0
+margin_right = 486.0
+margin_bottom = 141.0
+size_flags_horizontal = 3
+text = "Crazy Frog"
+
 [node name="FutureButton" type="Button" parent="MarginContainer/VBoxContainer/GridContainer"]
 visible = false
 margin_top = 51.0
@@ -86,3 +93,4 @@ text = "???"
 [connection signal="pressed" from="MarginContainer/VBoxContainer/GridContainer/SuperTrooper" to="." method="_on_SuperTrooper_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/GridContainer/JohnCena" to="." method="_on_JohnCena_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/GridContainer/KometaBrno" to="." method="_on_KometaBrno_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/GridContainer/CrazyFrog" to="." method="_on_CrazyFrog_pressed"]

@@ -15,8 +15,7 @@ script = ExtResource( 3 )
 
 [node name="MicrophoneInput" parent="." instance=ExtResource( 4 )]
 HIGHEST_NOTE_INDEX = 45
-NOTES_BUFFER_SIZE = 5
-QUIET_TOLERANCE = 3
+QUIET_TOLERANCE = 2
 THROW_AWAY_QUIET_NOTES = true
 
 [node name="MarginContainer" type="MarginContainer" parent="."]

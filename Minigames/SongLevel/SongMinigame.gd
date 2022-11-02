@@ -9,6 +9,11 @@ var player_score = 0
 
 func _ready():
 	song_resource = SceneManager.songResource
+	
+	var high = 0
+	for note in song_resource.notes: high = max(note, high)
+	
+	$MicrophoneInput.HIGHEST_NOTE_INDEX = max(high, $MicrophoneInput.HIGHEST_NOTE_INDEX)
 	$StartGameTimer.start()
 
 func start_game():

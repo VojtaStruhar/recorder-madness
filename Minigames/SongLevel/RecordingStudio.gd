@@ -20,7 +20,7 @@ var song_resource = null
 
 func _process(_delta):
 	note_label.text = NoteFrequencies.names[fletnicka.current_note]
-	note_index_label.text = str(fletnicka.current_note)
+	note_index_label.text = "-" if fletnicka.is_quiet else str(fletnicka.current_note)
 	if fletnicka.error_message != "":
 		subtitle.text = fletnicka.error_message
 	else:
@@ -67,7 +67,10 @@ func _on_SaveSong_pressed():
 
 
 func _on_NoteTimer_timeout():
-	played_notes.append(round(fletnicka.current_note))
+	if fletnicka.is_quiet:
+		played_notes.append(-1)
+	else:
+		played_notes.append(round(fletnicka.current_note))
 	metronomeLabel.set_timed_text("( X )")
 
 
