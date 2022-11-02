@@ -10,7 +10,7 @@ onready var note_index_label = $"%NoteIndexLabel"
 onready var subtitle = $"%Subtitle"
 onready var timedLabel := $"%TimedLabel"
 onready var timeLeftLabel := $"%TimeLeftLabel"
-
+onready var metronomeLabel := $"%MetronomeLabel"
 
 var is_recording = false
 
@@ -68,9 +68,11 @@ func _on_SaveSong_pressed():
 
 func _on_NoteTimer_timeout():
 	played_notes.append(round(fletnicka.current_note))
+	metronomeLabel.set_timed_text("( X )")
 
 
 func _on_StartTimer_timeout():
 	is_recording = true
 	note_timer.wait_time = 60 / bpm_input.value
+	metronomeLabel.wait_time = (60 / bpm_input.value) / 3
 	note_timer.start()

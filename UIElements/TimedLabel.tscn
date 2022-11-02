@@ -8,9 +8,6 @@ export(float) var wait_time = 1.0
 func set_timed_text(m_text: String):
 	self.text = m_text
 	$Timer.start(wait_time)
-	
-	
-
 
 func _on_Timer_timeout():
 	self.text = \"\"

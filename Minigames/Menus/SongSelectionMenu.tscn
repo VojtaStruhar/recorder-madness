@@ -66,6 +66,14 @@ margin_bottom = 90.0
 size_flags_horizontal = 3
 text = "John cena"
 
+[node name="KometaBrno" type="Button" parent="MarginContainer/VBoxContainer/GridContainer"]
+margin_left = 498.0
+margin_top = 51.0
+margin_right = 984.0
+margin_bottom = 90.0
+size_flags_horizontal = 3
+text = "HC KOMETA BRNO"
+
 [node name="FutureButton" type="Button" parent="MarginContainer/VBoxContainer/GridContainer"]
 visible = false
 margin_top = 51.0
@@ -77,3 +85,4 @@ text = "???"
 [connection signal="pressed" from="MarginContainer/VBoxContainer/GridContainer/HappyBday" to="." method="_on_HappyBday_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/GridContainer/SuperTrooper" to="." method="_on_SuperTrooper_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/GridContainer/JohnCena" to="." method="_on_JohnCena_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/GridContainer/KometaBrno" to="." method="_on_KometaBrno_pressed"]

@@ -13,4 +13,5 @@ func _on_SuperTrooper_pressed():
 func _on_JohnCena_pressed():
 	play_song("res://Assets/Songs/John_Cena_2.tres")
 
-
+func _on_KometaBrno_pressed():
+	play_song("res://Assets/Songs/Kometa_Brno.tres")

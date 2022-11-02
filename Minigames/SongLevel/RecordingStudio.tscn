@@ -106,6 +106,15 @@ min_value = 60.0
 max_value = 180.0
 value = 110.0
 
+[node name="MetronomeLabel" parent="MarginContainer/VBoxContainer/HBoxContainer3" instance=ExtResource( 6 )]
+unique_name_in_owner = true
+margin_left = 232.0
+margin_top = 2.0
+margin_right = 240.0
+margin_bottom = 22.0
+custom_colors/font_color = Color( 1, 0, 0, 1 )
+text = "X"
+
 [node name="HBoxContainer5" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
 margin_top = 330.0
 margin_right = 984.0
