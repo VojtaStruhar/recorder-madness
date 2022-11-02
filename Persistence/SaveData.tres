@@ -7,5 +7,7 @@ script = ExtResource( 1 )
 microphone_choice = "Trust GXT 232 Microphone (94)"
 highscore_tyrian = 8
 highscore_songs = {
-"Happy Birthday!": 46
+"Happy Birthday!": 50,
+"John Cena": 15,
+"Super Trooper": 147
 }

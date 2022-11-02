@@ -110,7 +110,7 @@ func place_object(template, gx_coord):
 	var obstacle = template.instance()
 	
 	get_parent().add_child(obstacle)
-	obstacle.position.y = 0
+	obstacle.global_position.y = global_position.y
 	obstacle.global_position.x = gx_coord
 	
 	obstacle.speed = minigame.song_resource.bpm * 1.5
