@@ -39,11 +39,16 @@ func _on_MoneyScanner_area_entered(area):
 func finish_game():
 	$FinishGameTimer.start()
 
-
+func game_over_transition():
+	if !(song_resource.name in PersistentData.highscore_songs) \
+		or player_score > PersistentData.highscore_songs[song_resource.name]:
+		
+		PersistentData.highscore_songs[song_resource.name] = player_score
+	SceneManager.game_over(player_score, SceneManager.Screen.SONG)
 
 func _on_FinishGameTimer_timeout():
-	SceneManager.game_over(player_score, SceneManager.Screen.SONG)
+	game_over_transition()
 
 # Player rammed into something (tree?)
 func _on_ObstacleScanner_area_entered(area):
-	SceneManager.game_over(player_score, SceneManager.Screen.SONG)
+	game_over_transition()

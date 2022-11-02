@@ -30,6 +30,8 @@ onready var enemySpawner := $\"../EnemySpawner\"
 
 func _on_LBoundary_area_entered(area):
 	print(\"GAME OVER\")
+	if enemySpawner.score > PersistentData.highscore_tyrian:
+		PersistentData.highscore_tyrian = enemySpawner.score
 	SceneManager.game_over(enemySpawner.score, SceneManager.Screen.TYRIAN)
 "
 

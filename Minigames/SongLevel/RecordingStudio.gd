@@ -55,6 +55,7 @@ func _on_StopRecording_pressed():
 
 func _on_SaveSong_pressed():
 	if song_name_input.text != "":
+		song_resource.name = song_name_input.text
 		var result = ResourceSaver.save("res://Assets/Songs/" + song_name_input.text.replace(" ", "_") + ".tres", song_resource)
 		if result != OK:
 			timedLabel.set_timed_text("Saving failed (" + str(result) + ")")
