@@ -17,4 +17,4 @@ func _on_KometaBrno_pressed():
 	play_song("res://Assets/Songs/Kometa_Brno.tres")
 
 func _on_CrazyFrog_pressed():
-	play_song("res://Assets/Songs/Crazy_Frog.tres")
+	play_song("res://Assets/Songs/Crazy_Frog_Double.tres")
