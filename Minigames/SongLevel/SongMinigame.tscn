@@ -72,6 +72,7 @@ var progress = 0
 const moneyBag = preload(\"res://Minigames/SongLevel/MoneyBag.tscn\")
 const treeBarrier = preload(\"res://Minigames/SongLevel/TreeBarrier.tscn\")
 const treeObstacle = preload(\"res://Minigames/SongLevel/TreeObstacle.tscn\")
+const decoration = preload(\"res://Minigames/SongLevel/DecorationTiny.tscn\")
 
 var last_note = -1
 var note_streak = 0
@@ -93,16 +94,18 @@ func _on_BpmTimer_timeout():
 	var note_relative = (note - fletnicka.LOWEST_NOTE_INDEX) / float(fletnicka.HIGHEST_NOTE_INDEX - fletnicka.LOWEST_NOTE_INDEX)
 	var reward_gx = extents * note_relative + leftBound.position.x
 	
-	
 	if note_streak % 4 == 0: 
 		place_object(treeBarrier, reward_gx)
 	else: 
 		if note > 0: # The note isn't quiet
 			place_object(moneyBag, reward_gx)
-		# Sometimes, place a tree
+		# Sometimes, place a tree on the edge (80% of the time)
 		if randf() < 0.8:
 			var coeff = -0.05 if randi() % 2 == 0 else 1.05
 			place_object(treeObstacle, extents * (coeff) + leftBound.position.x)
+	
+	if randi() % 3 > 1: # place a decoration 30% of the time
+		place_object(decoration, extents * randf())
 	
 	last_note = note
 	progress += 1

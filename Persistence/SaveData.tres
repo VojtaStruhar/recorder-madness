@@ -4,7 +4,7 @@
 
 [resource]
 script = ExtResource( 1 )
-microphone_choice = "Trust GXT 232 Microphone (79)"
+microphone_choice = "Default"
 highscore_tyrian = 8
 highscore_songs = {
 "Crazy Frog": 21,
