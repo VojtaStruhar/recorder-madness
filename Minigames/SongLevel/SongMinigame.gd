@@ -3,6 +3,9 @@ extends Node2D
 onready var bpmTimer = $"%BpmTimer"
 onready var playerSprite = $YSort/SheepPlayer/Sheep
 
+onready var soundPlayer = $SoundPlayer
+onready var metronome = $MetronomeTimer
+
 var song_resource: SongResource = null
 
 var player_score = 0
@@ -24,7 +27,9 @@ func start_game():
 	
 	print("GAME STARTED, bpm: ", song_resource.bpm)
 	bpmTimer.wait_time = 60.0 / song_resource.bpm
+	metronome.wait_time = 60.0 / song_resource.bpm
 	bpmTimer.start()
+	metronome.start()
 	
 	$Grass.speed = song_resource.bpm * 1.5
 	$Grass.is_running = true
@@ -57,3 +62,6 @@ func _on_FinishGameTimer_timeout():
 # Player rammed into something (tree?)
 func _on_ObstacleScanner_area_entered(area):
 	game_over_transition()
+
+func _on_MetronomeTimer_timeout():
+	soundPlayer.play()
