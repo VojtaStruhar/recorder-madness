@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://Assets/TinySwordsPack/HappySheep_Bouncing.png" type="Texture" id=1]
 [ext_resource path="res://Assets/TinySwordsPack/grass.png" type="Texture" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://Minigames/SongLevel/SheepPlayer.gd" type="Script" id=5]
 [ext_resource path="res://UIElements/app_theme.tres" type="Theme" id=6]
 [ext_resource path="res://Assets/click_001.ogg" type="AudioStream" id=7]
+[ext_resource path="res://Assets/UI/Peach Days.ttf" type="DynamicFontData" id=8]
 
 [sub_resource type="GDScript" id=8]
 resource_name = "Grass"
@@ -24,6 +25,11 @@ func _process(delta):
 							rect.size.x, 
 							rect.size.y)
 "
+
+[sub_resource type="DynamicFont" id=12]
+size = 48
+use_filter = true
+font_data = ExtResource( 8 )
 
 [sub_resource type="AtlasTexture" id=1]
 atlas = ExtResource( 1 )
@@ -175,6 +181,21 @@ margin_top = -10.0
 margin_right = 262.0
 margin_bottom = 10.0
 text = "Score: 0"
+
+[node name="CenterContainer" type="CenterContainer" parent="CanvasLayer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = ExtResource( 6 )
+
+[node name="AnnounceLabel" type="Label" parent="CanvasLayer/CenterContainer"]
+unique_name_in_owner = true
+margin_left = 114.0
+margin_top = 271.0
+margin_right = 910.0
+margin_bottom = 329.0
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_fonts/font = SubResource( 12 )
+text = "Song name and what it begins with"
 
 [node name="YSort" type="YSort" parent="."]
 

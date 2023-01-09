@@ -1,6 +1,7 @@
 extends Node2D
 
 onready var bpmTimer = $"%BpmTimer"
+onready var announceLabel = $"%AnnounceLabel"
 onready var playerSprite = $YSort/SheepPlayer/Sheep
 
 onready var soundPlayer = $SoundPlayer
@@ -13,6 +14,8 @@ var player_score = 0
 func _ready():
 	song_resource = SceneManager.songResource
 	
+	announceLabel.text = "First note: " + NoteFrequencies.names[song_resource.notes[0]].split(" ")[0]
+	
 	var high = 0
 	for note in song_resource.notes: high = max(note, high)
 	
@@ -20,6 +23,9 @@ func _ready():
 	$StartGameTimer.start()
 
 func start_game():
+	create_tween().tween_property(announceLabel, "modulate:a", 0.0, 0.3)
+	
+	
 	if song_resource == null: 
 		printerr("No song assigned for minigame")
 		SceneManager.change_scene(SceneManager.Screen.MAIN_MENU)
