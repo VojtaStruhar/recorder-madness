@@ -70,4 +70,5 @@ func _on_ObstacleScanner_area_entered(area):
 	game_over_transition()
 
 func _on_MetronomeTimer_timeout():
-	soundPlayer.play()
+	# soundPlayer.play()
+	pass
