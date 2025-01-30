@@ -4,7 +4,7 @@
 
 [resource]
 script = ExtResource( 1 )
-microphone_choice = "Default"
+microphone_choice = "MacBook Air Microphone (85)"
 highscore_tyrian = 8
 highscore_songs = {
 "Crazy Frog": 21,
